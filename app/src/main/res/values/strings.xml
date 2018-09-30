@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">CowFarm</string>
+
+    <string name="name">Name</string>
+    <string name="userName">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="signUp">Sign Up</string>
+    <string name="emptyField">Complete Fields</string>
+    <string name="worngPassword">Wrong Pasworrd</string>
+    <string name="pleaseWait">Please Wait</string>
+    <string name="loading">Loading ....</string>
+
+</resources>
