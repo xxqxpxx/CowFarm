@@ -6,6 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#57d843"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:orientation="vertical"
     tools:context="com.example.ibrahim.cowfarm.View.RegisterScreen">
 
 
@@ -97,13 +100,18 @@
                       android:id="@+id/txIn_confirmPassword"
                       />
               </android.support.design.widget.TextInputLayout>
-             <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_gravity="center"
-                 android:text="@string/signUp"
-                 android:id="@+id/bt_signUp"
-                 />
+
+
+              <ImageView
+                  android:layout_marginTop="15dp"
+                  android:id="@+id/bt_signUp"
+                  android:layout_width="200dp"
+                  android:layout_height="100dp"
+                  android:layout_gravity="center"
+                  android:scaleType="fitXY"
+                  android:background="@drawable/btn_signup"
+                  />
+
           </LinearLayout>
           <LinearLayout
               android:layout_width="match_parent"

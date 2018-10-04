@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+    android:background="@drawable/request_txt_box"
+    android:orientation="horizontal"
+    android:weightSum="3"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Mohamed AHMed "
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:id="@+id/btn_accept"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/accept_btn" />
+
+
+        <ImageView
+            android:id="@+id/btn_reject"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:src="@drawable/reject_btn" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".View.HomeActivty">
+
+
+    <LinearLayout
+        android:id="@+id/toplayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bar"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_money"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:src="@drawable/money"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="0dp" />
+
+            <TextView
+                android:id="@+id/txt_money_count"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/box" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_food"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
+                android:src="@drawable/food_ico"
+                />
+
+            <TextView
+                android:id="@+id/txt_food_count"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/box"
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_medicine"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/medicine_ico"
+                android:layout_marginLeft="0dp" />
+
+            <TextView
+                android:id="@+id/txt_medicine_count"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/box"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_animals"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/animals_ico"
+                android:layout_marginLeft="0dp" />
+
+            <TextView
+                android:id="@+id/txt_animals_count"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/box"
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/profile"
+                android:layout_marginLeft="0dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:gravity="end"
+        android:layout_marginTop="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/img_resources"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:src="@drawable/resources_click"
+            android:layout_marginRight="50dp"
+            android:scaleType="fitXY"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:gravity="end"
+        >
+
+        <ImageView
+            android:id="@+id/img_market"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:src="@drawable/market_btn"
+            android:layout_marginRight="50dp"
+            android:scaleType="fitXY"
+
+            />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="start"
+        android:gravity="start"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_farm"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/farm_img"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignEnd="@+id/img_farm"
+            android:layout_alignParentBottom="true"
+            android:text="LEVEL 1"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorAccent"
+            android:layout_alignRight="@+id/img_farm" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="end"
+        android:gravity="end"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_stock"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+            android:scaleType="fitXY"
+            android:src="@drawable/stockyard_img" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignEnd="@+id/img_stock"
+            android:layout_alignParentBottom="true"
+            android:text="LEVEL 1"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorAccent" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="start"
+        android:gravity="start"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_factory"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="30dp"
+
+            android:src="@drawable/factory_img"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignEnd="@+id/img_factory"
+            android:layout_alignParentBottom="true"
+            android:text="LEVEL 1"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorAccent" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="end"
+        android:layout_marginRight="30dp"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_hospital"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/farm_img"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignEnd="@+id/img_farm"
+            android:layout_alignParentBottom="true"
+            android:text="LEVEL 1"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorAccent" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        >
+
+
+    <ImageView
+        android:id="@+id/btn_water"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:src="@drawable/water_btn"
+        android:scaleType="fitCenter"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        />
+
+
+        <ImageView
+            android:id="@+id/btn_electricity"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:src="@drawable/electricity_btn"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="10dp"
+
+            />
+
+        <ImageView
+            android:id="@+id/btn_doctors"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:src="@drawable/doctors_btn"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="10dp"
+
+            />
+
+        <ImageView
+            android:id="@+id/btn_farmers"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:src="@drawable/farmers_btn"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="10dp"
+
+            />
+
+        <ImageView
+            android:id="@+id/btn_workers"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:src="@drawable/workers_btn"
+            android:scaleType="fitCenter"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>
