@@ -24,7 +24,7 @@ public class SplachScreen extends AppCompatActivity {
             @Override
             public void run() {
                 /* Create an Intent that will start the RegisterScreen. */
-                Intent mainIntent = new Intent(SplachScreen.this,RegisterScreen.class);
+                Intent mainIntent = new Intent(SplachScreen.this , LoginActivity.class);
                 SplachScreen.this.startActivity(mainIntent);
                 SplachScreen.this.finish();
             }

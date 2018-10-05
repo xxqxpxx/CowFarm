@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.ibrahim.cowfarm.Model.ApiInterface.SignUpApi;
+import com.example.ibrahim.cowfarm.Model.ApiInterface.UserApi;
 import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelSignUp;
 import com.example.ibrahim.cowfarm.R;
 import com.example.ibrahim.cowfarm.Retrofit.ApiConnection;
@@ -116,7 +116,7 @@ public class RegisterScreen extends AppCompatActivity {
                 ApiConnection connection = new ApiConnection();
                 Retrofit retrofit = connection.connectWith();
 
-                final SignUpApi signUpApi = retrofit.create(SignUpApi.class);
+                final UserApi signUpApi = retrofit.create(UserApi.class);
 
                 final Call<ResultModelSignUp> getInterestConnection = signUpApi.
                         signUp(name,userName,email,password,confirmPassword);

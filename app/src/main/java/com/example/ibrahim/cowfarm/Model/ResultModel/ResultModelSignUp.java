@@ -23,4 +23,5 @@ public class ResultModelSignUp
     public void setState(String state) {
         this.state = state;
     }
+
 } // class of ResultModelSignUp
