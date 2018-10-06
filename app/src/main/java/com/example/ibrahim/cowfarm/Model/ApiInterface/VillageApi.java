@@ -1,5 +1,6 @@
 package com.example.ibrahim.cowfarm.Model.ApiInterface;
 
+import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelFiterbyResource;
 import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelLogin;
 import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelSignUp;
 
@@ -16,14 +17,11 @@ import retrofit2.http.Path;
 
 public interface VillageApi {
 
-
     @GET("resources/{resource}")
-    Call<Object> getUsersByResource(@Path(value = "resource", encoded = true) String id );
+    Call<ResultModelFiterbyResource> getUsersByResource(@Path(value = "resource", encoded = true) String id );
 
 
     @GET("resources")
     Call<Object> resourceLookup();
-
-
 
 }

@@ -1,6 +1,9 @@
 package com.example.ibrahim.cowfarm.Model.ApiInterface;
 
+import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelBuyItem;
+import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelGeneric;
 import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelLogin;
+import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelUpgradeRequest;
 
 import java.util.Map;
 
@@ -15,18 +18,18 @@ public interface MarketApi {
 
 
     @POST("buildinginfo")
-    Call<Object> get_building_info(@Body Map<String, String> headers);
+    Call<ResultModelGeneric> get_building_info(@Body Map<String, String> headers);
 
 
     @POST("upgrade")
-    Call<Object> upgrade_item(@Body Map<String, String> headers);
+    Call<ResultModelUpgradeRequest> upgrade_item(@Body Map<String, String> headers);
 
 
     @POST("item-sell")
-    Call<Object> sell_item( @Body Map<String, String> headers);
+    Call<ResultModelBuyItem> sell_item( @Body Map<String, String> headers);
 
     @POST("item-buy")
-    Call<Object> buy_item( @Body Map<String, String> headers);
+    Call<ResultModelBuyItem> buy_item(@Body Map<String, String> headers);
 
 
 
