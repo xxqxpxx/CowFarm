@@ -1,5 +1,6 @@
 package com.example.ibrahim.cowfarm.View;
 
+import android.app.Dialog;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -64,6 +65,8 @@ public class HomeActivty extends AppCompatActivity {
     @BindView(R.id.hospital_level_count)
     TextView hospital_level_count;
 
+    Dialog farmDialog , marketDialog , resourceDialog;
+
 
     ResultModelLogin resultModelLogin ;
     @Override
@@ -72,11 +75,24 @@ public class HomeActivty extends AppCompatActivity {
         setContentView(R.layout.activity_home_activty);
 
 
+        initDialog();
         // Get User Inventory
 
         setdata(resultModelLogin);
 
     }
+
+    private  void initDialog()
+    {
+        farmDialog = new Dialog(this);
+        farmDialog.setContentView(R.layout.dialog_farm);
+
+        marketDialog = new Dialog(this);
+        marketDialog.setContentView(R.layout.dialog_market);
+
+        resourceDialog = new Dialog(this);
+        resourceDialog.setContentView(R.layout.resource_dialog);
+    } // intialization of farmDialogs
 
     private void setdata(ResultModelLogin resultModelLogin) {
 
@@ -120,15 +136,19 @@ public class HomeActivty extends AppCompatActivity {
     @OnClick(R.id.img_resources)
     public  void resources() {
 
+        resourceDialog.show();
     }
 
     @OnClick(R.id.img_market)
     public  void market() {
 
+        marketDialog.show();
     }
 
     @OnClick(R.id.img_farm)
     public  void onFarmClick() {
+
+        farmDialog.show();
 
     }
 
