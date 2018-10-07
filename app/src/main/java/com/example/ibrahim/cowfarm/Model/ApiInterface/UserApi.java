@@ -1,6 +1,8 @@
 package com.example.ibrahim.cowfarm.Model.ApiInterface;
 
+import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelInventory;
 import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelLogin;
+import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelResources;
 import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelSignUp;
 
 import java.util.Map;
@@ -32,15 +34,15 @@ public interface UserApi {
 
 
     @GET("user/{id}/inventory")
-    Call<Object> getInventory(@Path(value = "id", encoded = true) String id );
+    Call<ResultModelInventory> getInventory(@Path(value = "id", encoded = true) String id );
 
 
     @GET("user/{id}/resources")
-    Call<Object> getResources(@Path(value = "id", encoded = true) String id );
+    Call<ResultModelResources> getResources(@Path(value = "id", encoded = true) String id );
 
 
     @GET("user/{id}")
-    Call<Object> getUserInfo(@Path(value = "id", encoded = true) String id );
+    Call<ResultModelLogin> getUserInfo(@Path(value = "id", encoded = true) String id );
 
 
     @GET("users")

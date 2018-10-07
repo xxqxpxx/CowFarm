@@ -19,4 +19,12 @@
     ldjglfdjlsgnsldfgksdkfgksgkhsdgklhsdgojfdhpj</string>
 
 
+
+    <string name="water">1</string>
+    <string name="electricity">2</string>
+    <string name="workers">3</string>
+    <string name="doctors">4</string>
+    <string name="farmers">5</string>
+
+
 </resources>

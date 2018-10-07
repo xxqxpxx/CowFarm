@@ -1,7 +1,9 @@
 package com.example.ibrahim.cowfarm.Model.ApiInterface;
 
+import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelGeneric;
 import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelLogin;
 import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelSignUp;
+import com.example.ibrahim.cowfarm.Model.ResultModel.ResultModelUserRequests;
 
 import java.util.Map;
 
@@ -18,21 +20,21 @@ public interface RequestApi {
 
     @Headers("Content-Type: application/json")
     @POST("make-request")
-    Call<ResultModelLogin> create_request(@Body Map<String, String> headers);
+    Call<ResultModelGeneric> create_request(@Body Map<String, String> headers);
 
 
     @GET("user-requests/{id}")
-    Call<Object> get_all_user_received_requests(@Path(value = "id", encoded = true) String id );
+    Call<ResultModelUserRequests> get_all_user_received_requests(@Path(value = "id", encoded = true) String id );
 
 
     @GET("user/{id}/requests")
-    Call<Object> get_all_sent_requests(@Path(value = "id", encoded = true) String id);
+    Call<ResultModelUserRequests> get_all_sent_requests(@Path(value = "id", encoded = true) String id);
 
 
-    @POST("request/{id}/confirm")
-    Call<Object> Confirm_Request(@Path(value = "id", encoded = true) String id , @Body Map<String, String> headers);
+    @POST("request/{id}/confirm") // id for request , user_id for the user who will approve/decline the request
+    Call<ResultModelGeneric> Confirm_Request(@Path(value = "id", encoded = true) String id , @Body Map<String, String> headers);
 
     @POST("request/{id}/reject")
-    Call<Object> Reject_Request(@Path(value = "id", encoded = true) String id , @Body Map<String, String> headers);
+    Call<ResultModelGeneric> Reject_Request(@Path(value = "id", encoded = true) String id , @Body Map<String, String> headers);
 
 }
