@@ -1,0 +1,186 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/request_txt_box"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+      <TextView
+          android:id="@+id/txt_rank"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="1"
+          android:textColor="@color/brown"
+          android:fontFamily="@font/disneycomic"
+          android:textSize="30sp"
+          android:layout_marginRight="50dp"
+          android:layout_marginEnd="50dp" />
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Androw"
+            android:textColor="@color/brown"
+            android:fontFamily="@font/disneycomic"
+            android:textSize="25sp"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/toplayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_gravity="bottom"
+        >
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/img_money"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/money" />
+
+        <TextView
+            android:id="@+id/txt_money_count"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/box"
+            android:fontFamily="@font/disneycomic"
+            android:gravity="center"
+            android:paddingRight="11dp"
+            android:text="100"
+            android:textColor="@color/DarkYello"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/img_food"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/food_ico" />
+
+        <TextView
+            android:id="@+id/txt_food_count"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/box"
+            android:fontFamily="@font/disneycomic"
+            android:gravity="center"
+            android:paddingRight="11dp"
+            android:text="100"
+            android:textColor="@color/DarkYello"
+            android:textSize="10sp"
+
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/img_medicine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/medicine_ico" />
+
+        <TextView
+            android:id="@+id/txt_medicine_count"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/box"
+            android:fontFamily="@font/disneycomic"
+            android:gravity="center"
+            android:paddingRight="11dp"
+            android:text="100"
+            android:textColor="@color/DarkYello"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:id="@+id/img_animals"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/animals_ico" />
+
+        <TextView
+            android:id="@+id/txt_animals_count"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/box"
+            android:fontFamily="@font/disneycomic"
+            android:gravity="center"
+            android:paddingRight="11dp"
+            android:text="100"
+            android:textColor="@color/DarkYello"
+            android:textSize="10sp"
+
+            />
+    </RelativeLayout>
+
+
+
+</LinearLayout>
+
+</LinearLayout>

@@ -9,7 +9,7 @@
     android:gravity="center"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context="com.cat.ahmed.cowfarm.View.RegisterScreen">
+    tools:context="com.cat.ahmed.VTIFarm.View.RegisterScreen">
 
 
       <LinearLayout
@@ -42,6 +42,9 @@
                       android:gravity="center"
                       android:inputType="text"
                       android:id="@+id/txIn_name"
+                      android:textColor="@color/brown"
+                      android:textColorHint="@color/brown"
+
                       />
               </android.support.design.widget.TextInputLayout>
               <android.support.design.widget.TextInputLayout
@@ -56,6 +59,9 @@
                       android:gravity="center"
                       android:inputType="text"
                       android:id="@+id/txIn_userName"
+                      android:textColor="@color/brown"
+                      android:textColorHint="@color/brown"
+
                       />
               </android.support.design.widget.TextInputLayout>
               <android.support.design.widget.TextInputLayout
@@ -70,6 +76,9 @@
                       android:gravity="center"
                       android:inputType="textEmailAddress"
                       android:id="@+id/txIn_email"
+                      android:textColor="@color/brown"
+                      android:textColorHint="@color/brown"
+
                       />
               </android.support.design.widget.TextInputLayout>
               <android.support.design.widget.TextInputLayout
@@ -84,6 +93,9 @@
                       android:gravity="center"
                       android:inputType="textPassword"
                       android:id="@+id/txIn_password"
+                      android:textColor="@color/brown"
+                      android:textColorHint="@color/brown"
+
                       />
               </android.support.design.widget.TextInputLayout>
               <android.support.design.widget.TextInputLayout
@@ -98,6 +110,9 @@
                       android:gravity="center"
                       android:inputType="textPassword"
                       android:id="@+id/txIn_confirmPassword"
+                      android:textColor="@color/brown"
+                      android:textColorHint="@color/brown"
+
                       />
               </android.support.design.widget.TextInputLayout>
 

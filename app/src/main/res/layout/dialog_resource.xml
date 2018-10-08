@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="400dp"
     android:background="@drawable/bg_box"
-    android:layout_height="match_parent">
+    android:layout_height="500dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     android:id="@+id/btn_water"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/resource_water_on"
+                    android:src="@drawable/resource_water_on"
                     />
             </LinearLayout>
             <LinearLayout
@@ -47,7 +47,7 @@
                     android:id="@+id/btn_electricity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/resource_elec_off"
+                    android:src="@drawable/resource_elec_off"
                     />
             </LinearLayout>
             <LinearLayout
@@ -61,7 +61,7 @@
                     android:id="@+id/btn_doctors"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/resource_doc_off"
+                    android:src="@drawable/resource_doc_off"
                     />
             </LinearLayout>
             <LinearLayout
@@ -74,7 +74,7 @@
                     android:id="@+id/btn_farmers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/resource_farmer_off"
+                    android:src="@drawable/resource_farmer_off"
                     />
             </LinearLayout>
             <LinearLayout
@@ -87,7 +87,7 @@
                     android:id="@+id/btn_workers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/resource_worker_off"
+                    android:src="@drawable/resource_worker_off"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -118,6 +118,7 @@
 
 
     <Button
+        android:id="@+id/title"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/resources_click"
@@ -130,7 +131,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true" />
+        android:layout_toRightOf="@+id/title" />
 </RelativeLayout>
