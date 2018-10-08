@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ibrahim.cowfarm">
+    package="com.cat.ahmed.cowfarm">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,16 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.SplachScreen">
+        <activity android:name="com.cat.ahmed.cowfarm.View.SplachScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.RegisterScreen" />
-        <activity android:name=".View.HomeActivty" />
-        <activity android:name=".View.LoginActivity"></activity>
+        <activity android:name="com.cat.ahmed.cowfarm.View.RegisterScreen" />
+        <activity android:name="com.cat.ahmed.cowfarm.View.HomeActivty" />
+        <activity android:name="com.cat.ahmed.cowfarm.View.LoginActivity"></activity>
     </application>
 
 </manifest>

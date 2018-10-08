@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context="com.example.ibrahim.cowfarm.View.SplachScreen">
+    tools:context="com.cat.ahmed.cowfarm.View.SplachScreen">
 
     <ImageView
         android:layout_width="150dp"

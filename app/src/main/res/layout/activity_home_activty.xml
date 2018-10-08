@@ -44,6 +44,8 @@
                 android:gravity="center"
                 android:paddingRight="11dp"
                 android:text="100"
+                android:textColor="@color/DarkYello"
+                android:textSize="10sp"
                 android:background="@drawable/box" />
         </RelativeLayout>
 
@@ -70,6 +72,10 @@
                 android:gravity="center"
                 android:paddingRight="11dp"
                 android:text="100"
+
+                 
+                android:textColor="@color/DarkYello"
+                android:textSize="10sp"
                 android:background="@drawable/box"
 
                 />
@@ -102,6 +108,9 @@
                 android:gravity="center"
                 android:paddingRight="11dp"
                 android:text="100"
+
+                android:textColor="@color/DarkYello"
+                android:textSize="10sp"
                 android:background="@drawable/box" />
         </RelativeLayout>
 
@@ -132,6 +141,9 @@
                 android:gravity="center"
                 android:paddingRight="11dp"
                 android:text="100"
+
+                android:textColor="@color/DarkYello"
+                android:textSize="10sp"
                 android:background="@drawable/box"
 
                 />
@@ -171,7 +183,7 @@
         <ImageView
             android:id="@+id/img_resources"
             android:layout_width="100dp"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:src="@drawable/resources_click"
             android:layout_marginRight="50dp"
             android:scaleType="fitXY"
@@ -179,6 +191,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -189,7 +202,7 @@
         <ImageView
             android:id="@+id/img_market"
             android:layout_width="100dp"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:src="@drawable/market_btn"
             android:layout_marginRight="50dp"
             android:scaleType="fitXY"
@@ -202,6 +215,7 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_gravity="start"
+        android:layout_marginTop="5dp"
         android:gravity="start"
         android:orientation="vertical">
 
@@ -222,7 +236,8 @@
             android:layout_alignParentBottom="true"
             android:text="Level: "
             android:layout_marginRight="10dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/brown"
+            android:shadowColor="@android:color/black"
             android:layout_alignRight="@+id/img_farm" />
 
         <TextView
@@ -236,7 +251,20 @@
             android:layout_marginRight="1dp"
             android:layout_marginBottom="0dp"
             android:text="1"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/brown"
+                android:shadowColor="@android:color/black" />
+
+
+        <ImageView
+            android:id="@+id/img_requests"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="50dp"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/requests"
+            android:layout_alignParentRight="true" />
 
     </RelativeLayout>
 
@@ -267,7 +295,9 @@
             android:layout_alignParentBottom="true"
             android:text="Level: "
             android:layout_marginRight="10dp"
-            android:textColor="@color/colorAccent"
+
+            android:textColor="@color/brown"
+            android:shadowColor="@android:color/black"
             android:layout_alignRight="@+id/img_stock" />
 
         <TextView
@@ -281,7 +311,8 @@
             android:layout_marginRight="1dp"
             android:layout_marginBottom="0dp"
             android:text="1"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/brown"
+            android:shadowColor="@android:color/black" />
 
     </RelativeLayout>
 
@@ -311,7 +342,9 @@
             android:layout_alignParentBottom="true"
             android:text="Level: "
             android:layout_marginRight="10dp"
-            android:textColor="@color/colorAccent"
+
+            android:textColor="@color/brown"
+            android:shadowColor="@android:color/black"
             android:layout_alignRight="@+id/img_factory" />
 
         <TextView
@@ -325,7 +358,8 @@
             android:layout_marginRight="1dp"
             android:layout_marginBottom="0dp"
             android:text="1"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/brown"
+            android:shadowColor="@android:color/black"/>
 
     </RelativeLayout>
 
@@ -342,7 +376,7 @@
             android:layout_width="160dp"
             android:layout_height="80dp"
             android:scaleType="fitXY"
-            android:src="@drawable/hospital"
+            android:src="@drawable/hospital_img"
             />
 
         <TextView
@@ -353,7 +387,9 @@
             android:layout_alignParentBottom="true"
             android:text="Level: "
             android:layout_marginRight="10dp"
-            android:textColor="@color/colorAccent"
+
+            android:textColor="@color/brown"
+            android:shadowColor="@android:color/black"
             android:layout_alignRight="@+id/img_hospital" />
 
         <TextView
@@ -367,7 +403,10 @@
             android:layout_marginRight="1dp"
             android:layout_marginBottom="0dp"
             android:text="1"
-            android:textColor="@color/colorAccent" />
+
+            android:textColor="@color/brown"
+            android:shadowColor="@android:color/black"
+            />
 
     </RelativeLayout>
 

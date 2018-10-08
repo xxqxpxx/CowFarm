@@ -9,7 +9,7 @@
     android:gravity="center"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.ibrahim.cowfarm.View.RegisterScreen">
+    tools:context="com.cat.ahmed.cowfarm.View.RegisterScreen">
 
 
       <LinearLayout
