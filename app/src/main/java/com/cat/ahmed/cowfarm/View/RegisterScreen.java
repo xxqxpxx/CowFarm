@@ -13,6 +13,7 @@ import com.cat.ahmed.cowfarm.Model.ApiInterface.UserApi;
 import com.cat.ahmed.cowfarm.Model.ResultModel.ResultModelSignUp;
 import com.cat.ahmed.cowfarm.R;
 import com.cat.ahmed.cowfarm.Retrofit.ApiConnection;
+import com.cat.ahmed.cowfarm.View.fragments.water_resource_fragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,6 +56,7 @@ public class RegisterScreen extends AppCompatActivity {
 
         // init ButterKnife
         ButterKnife.bind(this);
+
 
     } // function of onCreate
 

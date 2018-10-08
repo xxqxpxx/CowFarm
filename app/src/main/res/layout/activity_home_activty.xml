@@ -45,6 +45,7 @@
                 android:paddingRight="11dp"
                 android:text="100"
                 android:textColor="@color/DarkYello"
+                android:fontFamily="@font/disneycomic"
                 android:textSize="10sp"
                 android:background="@drawable/box" />
         </RelativeLayout>
@@ -72,8 +73,7 @@
                 android:gravity="center"
                 android:paddingRight="11dp"
                 android:text="100"
-
-                 
+                android:fontFamily="@font/disneycomic"
                 android:textColor="@color/DarkYello"
                 android:textSize="10sp"
                 android:background="@drawable/box"
@@ -108,7 +108,7 @@
                 android:gravity="center"
                 android:paddingRight="11dp"
                 android:text="100"
-
+                android:fontFamily="@font/disneycomic"
                 android:textColor="@color/DarkYello"
                 android:textSize="10sp"
                 android:background="@drawable/box" />
@@ -141,7 +141,7 @@
                 android:gravity="center"
                 android:paddingRight="11dp"
                 android:text="100"
-
+                android:fontFamily="@font/disneycomic"
                 android:textColor="@color/DarkYello"
                 android:textSize="10sp"
                 android:background="@drawable/box"
@@ -238,7 +238,9 @@
             android:layout_marginRight="10dp"
             android:textColor="@color/brown"
             android:shadowColor="@android:color/black"
-            android:layout_alignRight="@+id/img_farm" />
+            android:layout_alignRight="@+id/img_farm"
+            android:fontFamily="@font/disneycomic"
+            />
 
         <TextView
             android:id="@+id/farm_count_level"
@@ -252,7 +254,9 @@
             android:layout_marginBottom="0dp"
             android:text="1"
             android:textColor="@color/brown"
-                android:shadowColor="@android:color/black" />
+            android:fontFamily="@font/disneycomic"
+
+            android:shadowColor="@android:color/black" />
 
 
         <ImageView
@@ -295,6 +299,7 @@
             android:layout_alignParentBottom="true"
             android:text="Level: "
             android:layout_marginRight="10dp"
+            android:fontFamily="@font/disneycomic"
 
             android:textColor="@color/brown"
             android:shadowColor="@android:color/black"
@@ -311,6 +316,8 @@
             android:layout_marginRight="1dp"
             android:layout_marginBottom="0dp"
             android:text="1"
+            android:fontFamily="@font/disneycomic"
+
             android:textColor="@color/brown"
             android:shadowColor="@android:color/black" />
 
@@ -342,6 +349,7 @@
             android:layout_alignParentBottom="true"
             android:text="Level: "
             android:layout_marginRight="10dp"
+            android:fontFamily="@font/disneycomic"
 
             android:textColor="@color/brown"
             android:shadowColor="@android:color/black"
@@ -358,6 +366,8 @@
             android:layout_marginRight="1dp"
             android:layout_marginBottom="0dp"
             android:text="1"
+            android:fontFamily="@font/disneycomic"
+
             android:textColor="@color/brown"
             android:shadowColor="@android:color/black"/>
 
@@ -387,6 +397,7 @@
             android:layout_alignParentBottom="true"
             android:text="Level: "
             android:layout_marginRight="10dp"
+            android:fontFamily="@font/disneycomic"
 
             android:textColor="@color/brown"
             android:shadowColor="@android:color/black"
@@ -403,6 +414,7 @@
             android:layout_marginRight="1dp"
             android:layout_marginBottom="0dp"
             android:text="1"
+            android:fontFamily="@font/disneycomic"
 
             android:textColor="@color/brown"
             android:shadowColor="@android:color/black"

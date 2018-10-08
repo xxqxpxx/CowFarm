@@ -42,6 +42,8 @@
                     android:layout_marginLeft="10dp"
                     android:textStyle="bold"
                     android:textSize="20dp"
+                    android:fontFamily="@font/disneycomic"
+                    android:textColor="@color/brown"
                     />
 
             </LinearLayout>
@@ -52,35 +54,45 @@
                 android:gravity="end"
                 >
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="items:" />
                 <EditText
                     android:id="@+id/count_animal"
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:hint="quantity"
+                    android:layout_weight="1"
                     android:text="1"
                     android:layout_marginRight="50dp"
                     android:layout_margin="2dp"
                     android:textSize="5sp"
+                    android:textColor="@color/DarkYello"
                     android:layout_marginEnd="50dp" />
 
                 <Button
                     android:id="@+id/btn_buy_animal"
-                    android:text="Buy $50"
+                    android:text="Buy $60"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/buy_btn"
                     android:layout_margin="2dp"
+
+                    android:fontFamily="@font/disneycomic"
+                    android:textColor="@color/DarkYello"
                     />
                 <Button
 
                     android:id="@+id/btn_sell_animal"
-                    android:text="Sell $50"
+                    android:text="Sell $40"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/sell_btn"
                     android:layout_margin="2dp"
+                    android:fontFamily="@font/disneycomic"
+                    android:textColor="@color/DarkYello"
                     />
 
             </LinearLayout>
@@ -113,6 +125,9 @@
                     android:layout_marginLeft="10dp"
                     android:textStyle="bold"
                     android:textSize="20dp"
+
+                    android:fontFamily="@font/disneycomic"
+                    android:textColor="@color/brown"
                     />
 
             </LinearLayout>
@@ -122,6 +137,11 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="items:" />
 
                 <EditText
                     android:id="@+id/count_medicine"
@@ -139,20 +159,24 @@
                 <Button
 
                     android:id="@+id/btn_buy_medicine"
-                    android:text="Buy $50"
+                    android:text="Buy $ 3"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/buy_btn"
                     android:layout_margin="2dp"
+                    android:fontFamily="@font/disneycomic"
+                    android:textColor="@color/DarkYello"
                     />
                 <Button
 
                     android:id="@+id/btn_sell_medicine"
-                    android:text="Sell $50"
+                    android:text="Sell $ 2"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/sell_btn"
                     android:layout_margin="2dp"
+                    android:fontFamily="@font/disneycomic"
+                    android:textColor="@color/DarkYello"
                     />
 
             </LinearLayout>
@@ -185,6 +209,9 @@
                     android:layout_marginLeft="10dp"
                     android:textStyle="bold"
                     android:textSize="20dp"
+
+                    android:fontFamily="@font/disneycomic"
+                    android:textColor="@color/brown"
                     />
 
             </LinearLayout>
@@ -195,6 +222,10 @@
                 android:gravity="end"
                 >
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="items:" />
 
                 <EditText
                     android:id="@+id/count_food"
@@ -212,20 +243,24 @@
                 <Button
 
                     android:id="@+id/btn_buy_food"
-                    android:text="Buy $50"
+                    android:text="Buy $ 1"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/buy_btn"
                     android:layout_margin="2dp"
+                    android:fontFamily="@font/disneycomic"
+                    android:textColor="@color/DarkYello"
                     />
                 <Button
 
                     android:id="@+id/btn_sell_food"
-                    android:text="Sell $50"
+                    android:text="Sell $ 25"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/sell_btn"
                     android:layout_margin="2dp"
+                    android:fontFamily="@font/disneycomic"
+                    android:textColor="@color/DarkYello"
                     />
 
             </LinearLayout>

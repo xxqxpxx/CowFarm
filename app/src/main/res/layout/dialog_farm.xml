@@ -78,6 +78,8 @@
                     android:text="Upgrade"
                     android:textSize="20dp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/disneycomic"
+
                     />
                 <ImageButton
                     android:layout_width="wrap_content"

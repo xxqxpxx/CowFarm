@@ -66,15 +66,16 @@ public class HomeActivty extends AppCompatActivity {
         setdata(resultModelLogin);
 
         initView();
-        getResourcesLists();
+        // getResourcesLists();
     }
 
-    private void getResourcesLists() {
+   /* private void getResourcesLists() {
 
         for (int i = 1 ; i <= 5 ; ++i)
             getAlluserWithResource(String.valueOf(i));
-    }
+    }*/
 
+/*
     private void getAlluserWithResource(final String id) {
 
         progress = new ProgressDialog(this);
@@ -87,14 +88,14 @@ public class HomeActivty extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
 
-                progress.dismiss();
+          //      progress.dismiss();
 
                 super.handleMessage(msg);
             }
 
         };
 
-        progress.show();
+     //   progress.show();
         new Thread() {
             public void run() {
                 //Retrofit
@@ -115,30 +116,30 @@ public class HomeActivty extends AppCompatActivity {
                             if (!response.isSuccessful()) {
                                 try {
                                     JSONObject jObjError = new JSONObject(response.errorBody().string());
-                               //     Toast.makeText(c , jObjError.getString("data"), Toast.LENGTH_LONG).show();
+                               //     Toast.makeText(context , jObjError.getString("data"), Toast.LENGTH_LONG).show();
                                 } catch (Exception e) {
-                                    //     Toast.makeText( c , e.getMessage(), Toast.LENGTH_LONG).show();
+                                    //     Toast.makeText( context , e.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             } else {
 
-                           //     Toast.makeText(c , "successfully", Toast.LENGTH_LONG).show();
+                           //     Toast.makeText(context , "successfully", Toast.LENGTH_LONG).show();
                                 resultModelFiterbyResources.add(response.body()) ;
 
                             }
 
-                            progress.dismiss();
+                 //           progress.dismiss();
 
                         } // try
                         catch (Exception e) {
                             Log.i("QP", "exception : " + e.toString());
-                                     progress.dismiss();
+               //                      progress.dismiss();
                         } // catch
                     } // onResponse
 
                     @Override
                     public void onFailure(Call<ResultModelFiterbyResource> call, Throwable t) {
                         Log.i("QP", "error : " + t.toString());
-                        progress.dismiss();
+                   //     progress.dismiss();
                     } // on Failure
                 });
                 // Retrofit
@@ -146,6 +147,7 @@ public class HomeActivty extends AppCompatActivity {
         }.start();
 
     }
+*/
 
 
     private void setupUI() {

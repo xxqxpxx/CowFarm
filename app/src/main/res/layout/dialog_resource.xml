@@ -27,14 +27,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="10"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/box_market"
+
                 >
                 <ImageView
                     android:id="@+id/btn_water"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/resource_water"
-                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/resource_water_on"
                     />
             </LinearLayout>
             <LinearLayout
@@ -42,14 +41,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="10"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/box_market"
+
                 >
                 <ImageView
                     android:id="@+id/btn_electricity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/resource_elec"
-                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/resource_elec_off"
                     />
             </LinearLayout>
             <LinearLayout
@@ -57,14 +55,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="10"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/box_market"
+
                 >
                 <ImageView
                     android:id="@+id/btn_doctors"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/resource_doc"
-                    android:layout_margin="10dp"
+                    android:background="@drawable/resource_doc_off"
                     />
             </LinearLayout>
             <LinearLayout
@@ -72,14 +69,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="10"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/box_market"
                 >
                 <ImageView
                     android:id="@+id/btn_farmers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/resource_farmer"
-                    android:layout_margin="10dp"
+                    android:background="@drawable/resource_farmer_off"
                     />
             </LinearLayout>
             <LinearLayout
@@ -87,14 +82,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="10"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/box_market"
                 >
                 <ImageView
                     android:id="@+id/btn_workers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/resource_worker"
-                    android:layout_margin="10dp"
+                    android:background="@drawable/resource_worker_off"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -106,6 +99,11 @@
             android:background="@drawable/box_market"
             >
 
+            <!--<FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/container"
+                />-->
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcv_layout"
