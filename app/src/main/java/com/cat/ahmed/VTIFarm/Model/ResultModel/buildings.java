@@ -16,7 +16,7 @@ public class buildings {
     @SerializedName("factory")
     public String factory;
 
-    @SerializedName("hospital_img")
+    @SerializedName("hospital")
     public String hospital;
 
     @SerializedName("stockyard")

@@ -1,107 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="500dp"
     android:background="@drawable/bg_box"
-    android:layout_height="500dp">
+    android:orientation="vertical"
+
+
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
+        android:layout_marginTop="80dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="50dp"
-        android:layout_marginTop="80dp"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginBottom="50dp"
-            android:orientation="vertical"
-            >
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:background="@drawable/box_market"
-                android:gravity="center"
-                >
+                android:gravity="center">
+
                 <ImageView
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/animals_ico"
-                    />
+                    android:background="@drawable/animals_ico" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Animal"
                     android:layout_marginLeft="10dp"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
                     android:fontFamily="@font/disneycomic"
-                    android:textColor="@color/brown"
+                    android:text="Animal"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+
                     />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="end"
-                >
+                android:gravity="end">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:fontFamily="@font/disneycomic"
 
-                    android:text="items:" />
+                    android:shadowColor="@android:color/white"
+                    android:text="items:"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
 
 
                 <EditText
                     android:id="@+id/count_animal"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:inputType="number"
-                    android:hint="quantity"
-                    android:layout_weight="1"
-                    android:text="1"
-                    android:layout_marginRight="50dp"
-                    android:layout_margin="2dp"
-                    android:fontFamily="@font/disneycomic"
                     android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/disneycomic"
                     android:gravity="center"
-                    android:textColor="@color/brown"
-                    android:layout_marginEnd="50dp" />
+                    android:hint="quantity"
+                    android:inputType="number"
+
+                    android:shadowColor="@android:color/white"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btn_buy_animal"
-                    android:text="Buy $60"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/buy_btn"
                     android:layout_margin="2dp"
+                    android:background="@drawable/buy_btn"
                     android:fontFamily="@font/disneycomic"
-                    android:textColor="@color/DarkYello"
+                    android:shadowColor="@android:color/white"
+                    android:text="Buy $60"
+                    android:textColor="@android:color/white"
                     android:textSize="10sp"
+                    android:textStyle="bold"
 
                     />
+
                 <Button
 
                     android:id="@+id/btn_sell_animal"
-                    android:text="Sell $40"
-                    android:textSize="10sp"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sell_btn"
                     android:layout_margin="2dp"
+                    android:background="@drawable/sell_btn"
                     android:fontFamily="@font/disneycomic"
-                    android:textColor="@color/DarkYello"
-                    />
+                    android:shadowColor="@android:color/white"
+                    android:text="Sell $40"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>
@@ -109,92 +122,101 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginBottom="50dp"
-            android:orientation="vertical"
-            >
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:background="@drawable/box_market"
-                android:gravity="center"
-                >
+                android:gravity="center">
+
                 <ImageView
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/medicine_ico"
-                    />
+                    android:background="@drawable/medicine_ico" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Medicine"
                     android:layout_marginLeft="10dp"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-
                     android:fontFamily="@font/disneycomic"
-                    android:textColor="@color/brown"
-                    />
+                    android:text="Medicine"
+                    android:textColor="@android:color/white"
+
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="end"
-                >
+                android:gravity="end">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="items:"
+                    android:layout_gravity="center_vertical"
                     android:fontFamily="@font/disneycomic"
+                    android:shadowColor="@android:color/white"
 
-                    />
+                    android:text="items:"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/count_medicine"
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:inputType="number"
-                    android:fontFamily="@font/disneycomic"
-
-                    android:hint="quantity"
-                    android:text="1"
-                    android:layout_marginRight="50dp"
-                    android:layout_margin="2dp"
-
                     android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginRight="50dp"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/disneycomic"
                     android:gravity="center"
-                    android:textColor="@color/brown"                    android:layout_marginEnd="50dp" />
+                    android:hint="quantity"
+
+                    android:inputType="number"
+                    android:shadowColor="@android:color/white"
+
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold">
+
+                </EditText>
 
                 <Button
 
                     android:id="@+id/btn_buy_medicine"
-                    android:text="Buy $ 3"
-                    android:textSize="10sp"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/buy_btn"
                     android:layout_margin="2dp"
+                    android:background="@drawable/buy_btn"
                     android:fontFamily="@font/disneycomic"
-                    android:textColor="@color/DarkYello"
-                    />
+                    android:shadowColor="@android:color/white"
+                    android:text="Buy $ 15"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
                 <Button
 
                     android:id="@+id/btn_sell_medicine"
-                    android:text="Sell $ 2"
-                    android:textSize="10sp"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sell_btn"
                     android:layout_margin="2dp"
+                    android:background="@drawable/sell_btn"
                     android:fontFamily="@font/disneycomic"
-                    android:textColor="@color/DarkYello"
-                    />
+                    android:shadowColor="@android:color/white"
+                    android:text="Sell $ 12"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>
@@ -202,91 +224,104 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginBottom="50dp"
-            android:orientation="vertical"
-            >
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:background="@drawable/box_market"
-                android:gravity="center"
-                >
+                android:gravity="center">
+
                 <ImageView
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/food_ico"
-                    />
+                    android:background="@drawable/food_ico" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Food"
                     android:layout_marginLeft="10dp"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-
                     android:fontFamily="@font/disneycomic"
-                    android:textColor="@color/brown"
-                    />
+                    android:text="Food"
+                    android:textColor="@android:color/white"
+
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="end"
-                >
+                android:gravity="end">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="items:"
+                    android:layout_gravity="center_vertical"
                     android:fontFamily="@font/disneycomic"
+
+                    android:shadowColor="@android:color/white"
+                    android:text="items:"
+                    android:textColor="@android:color/white"
+
+                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/count_food"
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:inputType="number"
-                    android:hint="quantity"
-                    android:text="1"
+                    android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/disneycomic"
 
-                    android:layout_marginRight="50dp"
-                    android:layout_margin="2dp"
-
-                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColor="@color/brown"                    android:layout_marginEnd="50dp" />
+                    android:hint="quantity"
+
+                    android:inputType="number"
+                    android:shadowColor="@android:color/white"
+
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold">
+
+                </EditText>
 
                 <Button
 
                     android:id="@+id/btn_buy_food"
-                    android:text="Buy $ 1"
-                    android:textSize="10sp"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/buy_btn"
                     android:layout_margin="2dp"
+                    android:background="@drawable/buy_btn"
                     android:fontFamily="@font/disneycomic"
-                    android:textColor="@color/DarkYello"
-                    />
+                    android:shadowColor="@android:color/white"
+                    android:text="Buy $ 7"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
                 <Button
 
                     android:id="@+id/btn_sell_food"
-                    android:text="Sell $ 25"
-                    android:textSize="10sp"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sell_btn"
                     android:layout_margin="2dp"
+                    android:background="@drawable/sell_btn"
                     android:fontFamily="@font/disneycomic"
-                    android:textColor="@color/DarkYello"
-                    />
+                    android:shadowColor="@android:color/white"
+                    android:text="Sell $ 5"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>
@@ -294,20 +329,27 @@
 
 
     <Button
+        android:id="@+id/tite"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:background="@drawable/market_btn"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/tite"
-        />
+        android:background="@drawable/market_btn" />
+
 
     <Button
         android:id="@+id/btn_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:layout_toRightOf="@+id/tite" />
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/close_btn" />
 
 
 </RelativeLayout>

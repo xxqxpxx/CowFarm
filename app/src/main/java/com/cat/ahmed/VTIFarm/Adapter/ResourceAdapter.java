@@ -57,7 +57,7 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.item_resource,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.custom_resource_layout,parent,false);
         return new MyViewHolder(view);
     }
 

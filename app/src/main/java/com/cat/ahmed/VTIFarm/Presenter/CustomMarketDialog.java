@@ -176,9 +176,9 @@ public class CustomMarketDialog extends Dialog implements
                                          Toast.makeText(wrapper.getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             } else {
-
-                                 Toast.makeText(wrapper.getActivity(), "successfully", Toast.LENGTH_LONG).show();
                                 HomeActivty.resultModelBuyItem = response.body();
+                                wrapper.updateUiCounter(response.body());
+
                             }
 
                             progress.dismiss();
@@ -251,8 +251,9 @@ public class CustomMarketDialog extends Dialog implements
                                     Toast.makeText(wrapper.getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                Toast.makeText(wrapper.getActivity(), "successfully", Toast.LENGTH_LONG).show();
-                                wrapper.updateUi(response.body());
+
+                                HomeActivty.resultModelBuyItem = response.body();
+                                wrapper.updateUiCounter(response.body());
                             }
 
                             progress.dismiss();

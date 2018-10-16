@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.cat.ahmed.VTIFarm.Model.ApiInterface.MarketApi;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelGeneric;
+import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelUpgradeInfo;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelUpgradeRequest;
 import com.cat.ahmed.VTIFarm.R;
 import com.cat.ahmed.VTIFarm.Retrofit.ApiConnection;
@@ -29,28 +30,29 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class customBuildingDialog  extends Dialog implements
+public class customBuildingDialog extends Dialog implements
         android.view.View.OnClickListener {
 
-    public Activity c;
-    String building , userId  ;
+    public wrapper wrapper;
+    String building, userId;
     public Dialog d;
 
-    ImageView img_buidling_type ;
-    TextView info;
-    Button btn_close , upgrade;
+    ImageView img_buidling_type;
+    TextView info, txt_currentLeveL, txt_money_count , farm_count_level;
+    Button btn_close, upgrade ;
 
     Handler handler;
     ProgressDialog progress;
 
     ResultModelUpgradeRequest resultModelUpgradeRequest;
+    ResultModelUpgradeInfo resultModelUpgradeInfo;
     ResultModelGeneric resultModelGeneric;
 
 
-    public customBuildingDialog(Activity a , String userId , String building) {
-        super(a);
+    public customBuildingDialog(wrapper wrapper, String userId, String building) {
+        super(wrapper.getActivity());
         // TODO Auto-generated constructor stub
-        this.c = a;
+        this.wrapper = wrapper;
         this.userId = userId;
         this.building = building;
     }
@@ -64,18 +66,21 @@ public class customBuildingDialog  extends Dialog implements
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
 
-        img_buidling_type =  findViewById(R.id.img_buidling_type);
-        btn_close  =  findViewById(R.id.btn_close);
+        img_buidling_type = findViewById(R.id.img_buidling_type);
+        btn_close = findViewById(R.id.btn_close);
         info = findViewById(R.id.info);
-        upgrade =  findViewById(R.id.upgrade);
+        upgrade = findViewById(R.id.upgrade);
+        txt_money_count = findViewById(R.id.txt_money_count);
+        txt_currentLeveL = findViewById(R.id.txt_currentLeveL);
+        farm_count_level = findViewById(R.id.farm_count_level);
 
         if (building.equals("farm"))
-          img_buidling_type.setImageResource(R.drawable.farm);
+            img_buidling_type.setImageResource(R.drawable.farm);
 
-        else  if (building.equals("factory"))
+        else if (building.equals("factory"))
             img_buidling_type.setImageResource(R.drawable.factory);
 
-        else  if (building.equals("stockyard"))
+        else if (building.equals("stockyard"))
             img_buidling_type.setImageResource(R.drawable.stockyard);
 
         else
@@ -91,21 +96,13 @@ public class customBuildingDialog  extends Dialog implements
 
     private void getBuildingInfo() {
 
-        progress = new ProgressDialog(c);
-        progress.setTitle(R.string.pleaseWait);
-        progress.setMessage(c.getString(R.string.loading));
-        progress.setCancelable(false);
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                progress.dismiss();
                 super.handleMessage(msg);
             }
 
         };
-        progress.show();
         new Thread() {
             public void run() {
                 //Retrofit
@@ -120,37 +117,40 @@ public class customBuildingDialog  extends Dialog implements
 
                 final MarketApi marketApi = retrofit.create(MarketApi.class);
 
-                final Call<ResultModelGeneric> getInterestConnection = marketApi.get_building_info(data);
+                final Call<ResultModelUpgradeInfo> getInterestConnection = marketApi.get_building_info(data);
 
-                getInterestConnection.enqueue(new Callback<ResultModelGeneric>() {
+                getInterestConnection.enqueue(new Callback<ResultModelUpgradeInfo>() {
                     @Override
-                    public void onResponse(Call<ResultModelGeneric> call, Response<ResultModelGeneric> response) {
+                    public void onResponse(Call<ResultModelUpgradeInfo> call, Response<ResultModelUpgradeInfo> response) {
                         try {
 
                             if (!response.isSuccessful()) {
                                 try {
                                     JSONObject jObjError = new JSONObject(response.errorBody().string());
-                                    Toast.makeText(c, jObjError.getString("data"), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(wrapper.getActivity(), jObjError.getString("data"), Toast.LENGTH_LONG).show();
                                 } catch (Exception e) {
-                                    Toast.makeText( c , e.getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(wrapper.getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                        info.setText("Info :   " + response.body().getData().toString().trim());
-                                }
 
-                            progress.dismiss();
+                                resultModelUpgradeInfo = response.body();
+                                info.setText(resultModelUpgradeInfo.getData().getDetails());
+
+                                txt_currentLeveL.setText(resultModelUpgradeInfo.getData().getNext_level());
+                                farm_count_level.setText(resultModelUpgradeInfo.getData().getCurrent_level());
+                                txt_money_count.setText(resultModelUpgradeInfo.getData().getReq_gold());
+
+                            }
 
                         } // try
                         catch (Exception e) {
                             Log.i("QP", "exception : " + e.toString());
-                            progress.dismiss();
                         } // catch
                     } // onResponse
 
                     @Override
-                    public void onFailure(Call<ResultModelGeneric> call, Throwable t) {
+                    public void onFailure(Call<ResultModelUpgradeInfo> call, Throwable t) {
                         Log.i("QP", "error : " + t.toString());
-                        progress.dismiss();
                     } // on Failure
                 });
                 // Retrofit
@@ -177,21 +177,14 @@ public class customBuildingDialog  extends Dialog implements
 
     private void upgradeBuilding() {
 
-        progress = new ProgressDialog(c);
-        progress.setTitle(R.string.pleaseWait);
-        progress.setMessage(c.getString(R.string.loading));
-        progress.setCancelable(false);
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                progress.dismiss();
                 super.handleMessage(msg);
             }
 
         };
-        progress.show();
         new Thread() {
             public void run() {
                 //Retrofit
@@ -215,28 +208,28 @@ public class customBuildingDialog  extends Dialog implements
                             if (!response.isSuccessful()) {
                                 try {
                                     JSONObject jObjError = new JSONObject(response.errorBody().string());
-                                    Toast.makeText(c, jObjError.getString("data"), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(wrapper.getActivity(), jObjError.getString("data"), Toast.LENGTH_LONG).show();
                                 } catch (Exception e) {
-                                    Toast.makeText( c , e.getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(wrapper.getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                Toast.makeText(c , response.body().getData().toString() , Toast.LENGTH_LONG).show();
+                                Toast.makeText(wrapper.getActivity(), response.body().getData() , Toast.LENGTH_LONG).show();
                                 resultModelUpgradeRequest = response.body();
+                                wrapper.updateUiBuilding(response.body());
+                                dismiss();
+
                             }
 
-                            progress.dismiss();
 
                         } // try
                         catch (Exception e) {
                             Log.i("QP", "exception : " + e.toString());
-                            progress.dismiss();
                         } // catch
                     } // onResponse
 
                     @Override
                     public void onFailure(Call<ResultModelUpgradeRequest> call, Throwable t) {
                         Log.i("QP", "error : " + t.toString());
-                        progress.dismiss();
                     } // on Failure
                 });
                 // Retrofit

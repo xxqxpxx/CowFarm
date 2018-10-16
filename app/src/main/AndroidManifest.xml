@@ -8,18 +8,20 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_icon"
         android:label="@string/app_name"
-        android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.cat.ahmed.VTIFarm.View.SplachScreen">
+        <activity android:name=".View.SplachScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.cat.ahmed.VTIFarm.View.RegisterScreen" />
-        <activity android:name="com.cat.ahmed.VTIFarm.View.HomeActivty" />
-        <activity android:name="com.cat.ahmed.VTIFarm.View.LoginActivity"></activity>
+        <activity android:name=".View.RegisterScreen" />
+        <activity android:name=".View.HomeActivty" />
+        <activity android:name=".View.LoginActivity" />
+        <activity android:name=".View.BuildingActivity" />
+        <activity android:name=".View.pdfviewer"></activity>
     </application>
 
 </manifest>

@@ -7,15 +7,15 @@ import java.util.List;
 public class ResultModelUpgradeRequest {
 
     @SerializedName("data")
-    public List<String> data;
+    public String data;
     @SerializedName("state")
     public String state;
 
-    public List<String> getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(List<String> data) {
+    public void setData(String data) {
         this.data = data;
     }
 

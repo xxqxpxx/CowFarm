@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "846479945847",
+    "firebase_url": "https://cowfarm-ebd35.firebaseio.com",
+    "project_id": "cowfarm-ebd35",
+    "storage_bucket": "cowfarm-ebd35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846479945847:android:b85b7b94043a30db",
+        "android_client_info": {
+          "package_name": "com.cat.ahmed.cowfarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846479945847-6ek2pj21m7am2ujgmqtps3i6ac0on76s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRgBV6Va_W9jxmcNWchsdRqB9LMAW9l8Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
@@ -24,6 +25,7 @@ import com.cat.ahmed.VTIFarm.Retrofit.ApiConnection;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,7 +41,7 @@ public class customResourcesDialog extends Dialog implements
     public ImageView btn_water, btn_electricity, btn_doctors, btn_farmers, btn_workers;
     FrameLayout container;
 
-    String resourceId  ;
+    String resourceId;
     Handler handler;
     ProgressDialog progress;
     ResultModelFiterbyResource resultModelFiterbyResource;
@@ -77,7 +79,7 @@ public class customResourcesDialog extends Dialog implements
         btn_doctors = findViewById(R.id.btn_doctors);
         btn_farmers = findViewById(R.id.btn_farmers);
         btn_workers = findViewById(R.id.btn_workers);
-      //  container = findViewById(R.id.container);
+        //  container = findViewById(R.id.container);
 
         btn_water.setOnClickListener(this);
         btn_electricity.setOnClickListener(this);
@@ -86,7 +88,7 @@ public class customResourcesDialog extends Dialog implements
         btn_workers.setOnClickListener(this);
 
 
-       // startًWaterFragment();
+        // startًWaterFragment();
 
     }
 
@@ -103,25 +105,52 @@ public class customResourcesDialog extends Dialog implements
             case R.id.btn_water:
                 getAlluserWithResourceNow("1");
                 btn_water.setImageResource(R.drawable.resource_water_on);
+
+                btn_electricity.setImageResource(R.drawable.resource_elec_off);
+                btn_doctors.setImageResource(R.drawable.resource_doc_off);
+                btn_farmers.setImageResource(R.drawable.resource_farmer_off);
+                btn_workers.setImageResource(R.drawable.resource_worker_off);
+
                 break;
             case R.id.btn_electricity:
                 getAlluserWithResourceNow("2");
                 btn_electricity.setImageResource(R.drawable.resource_elec_on);
+
+                btn_water.setImageResource(R.drawable.resource_water_off);
+                btn_doctors.setImageResource(R.drawable.resource_doc_off);
+                btn_farmers.setImageResource(R.drawable.resource_farmer_off);
+                btn_workers.setImageResource(R.drawable.resource_worker_off);
 
                 break;
             case R.id.btn_doctors:
                 getAlluserWithResourceNow("4");
                 btn_doctors.setImageResource(R.drawable.resource_doc_on);
 
+                btn_electricity.setImageResource(R.drawable.resource_elec_off);
+                btn_water.setImageResource(R.drawable.resource_water_off);
+                btn_farmers.setImageResource(R.drawable.resource_farmer_off);
+                btn_workers.setImageResource(R.drawable.resource_worker_off);
+
                 break;
             case R.id.btn_farmers:
                 getAlluserWithResourceNow("5");
                 btn_farmers.setImageResource(R.drawable.resource_farmer_on);
 
+                btn_electricity.setImageResource(R.drawable.resource_elec_off);
+                btn_doctors.setImageResource(R.drawable.resource_doc_off);
+                btn_water.setImageResource(R.drawable.resource_water_off);
+                btn_workers.setImageResource(R.drawable.resource_worker_off);
+
                 break;
             case R.id.btn_workers:
                 getAlluserWithResourceNow("3");
                 btn_workers.setImageResource(R.drawable.resource_worker_on);
+
+                btn_electricity.setImageResource(R.drawable.resource_elec_off);
+                btn_doctors.setImageResource(R.drawable.resource_doc_off);
+                btn_farmers.setImageResource(R.drawable.resource_farmer_off);
+                btn_water.setImageResource(R.drawable.resource_water_off);
+
                 break;
 
             case R.id.btn_close:
@@ -139,10 +168,8 @@ public class customResourcesDialog extends Dialog implements
             rcvOffers.removeAllViews();
         }
 
-        if ( adapter != null )
+        if (adapter != null)
             adapter.notifyDataSetChanged();
-
-
 
 
         adapter = new ResourceAdapter(context, resultModelUserRequests, userId, id);
@@ -163,36 +190,37 @@ public class customResourcesDialog extends Dialog implements
 
     private void getAlluserWithResourceNow(final String id) {
 
-
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        ApiConnection connection = new ApiConnection();
-        Retrofit retrofit = connection.connectWith();
 
-        final VillageApi marketApi = retrofit.create(VillageApi.class);
+                //Retrofit
+                ApiConnection connection = new ApiConnection();
+                Retrofit retrofit = connection.connectWith();
 
-        final Call<ResultModelFiterbyResource> getInterestConnection = marketApi.getUsersByResource(id);
+                final VillageApi marketApi = retrofit.create(VillageApi.class);
 
-        Response<ResultModelFiterbyResource> response = null;
-        try {
-            response = getInterestConnection.execute();
+                final Call<ResultModelFiterbyResource> getInterestConnection = marketApi.getUsersByResource(id , userId);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                Response<ResultModelFiterbyResource> response = null;
+                try {
+                    response = getInterestConnection.execute();
 
-        if (!response.isSuccessful()) {
-            try {
-                JSONObject jObjError = new JSONObject(response.errorBody().string());
-           //     Toast.makeText(getContext(), jObjError.getString("data"), Toast.LENGTH_LONG).show();
-            } catch (Exception e) {
-           //     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        } else {
-          //  Toast.makeText(context, "successfully", Toast.LENGTH_LONG).show();
-            resultModelFiterbyResource = response.body();
-            setData(resultModelFiterbyResource, id);
-        }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (!response.isSuccessful()) {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        //     Toast.makeText(getContext(), jObjError.getString("data"), Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        //     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    //  Toast.makeText(context, "successfully", Toast.LENGTH_LONG).show();
+                    resultModelFiterbyResource = response.body();
+                    setData(resultModelFiterbyResource, id);
+                }
     }
 }

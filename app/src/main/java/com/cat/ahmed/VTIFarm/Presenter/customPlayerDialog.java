@@ -118,8 +118,6 @@ public class customPlayerDialog  extends Dialog implements
                             } else {
                                 resultModelTopPlayer = response.body();
                                 setData(resultModelTopPlayer);
-                                Toast.makeText(c , "successfully", Toast.LENGTH_LONG).show();
-
                             }
 
                             progress.dismiss();

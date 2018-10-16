@@ -1,5 +1,6 @@
 package com.cat.ahmed.VTIFarm.Model.ApiInterface;
 
+import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelBuildingsResponse;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelInventory;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelLogin;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelResources;
@@ -36,6 +37,9 @@ public interface UserApi {
 
     @GET("user/{id}/inventory")
     Call<ResultModelInventory> getInventory(@Path(value = "id", encoded = true) String id );
+
+    @GET("user/{id}/buildings")
+    Call<ResultModelBuildingsResponse> getBuilding(@Path(value = "id", encoded = true) String id );
 
 
     @GET("user/{id}/resources")

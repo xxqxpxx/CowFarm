@@ -118,8 +118,6 @@ public class customRequestsDialog  extends Dialog implements
                             } else {
                                 resultModelUserRequests = response.body();
                                 setData(resultModelUserRequests);
-                                Toast.makeText(c , "successfully", Toast.LENGTH_LONG).show();
-
                             }
 
                             progress.dismiss();

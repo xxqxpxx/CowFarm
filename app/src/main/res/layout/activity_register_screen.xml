@@ -1,136 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:gravity="center"
     android:layout_gravity="center"
+    android:background="@drawable/bk"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context="com.cat.ahmed.VTIFarm.View.RegisterScreen">
 
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:gravity="center"
-          android:layout_margin="50dp"
-          android:orientation="vertical"
-          >
-          <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_weight="1"
-              ></LinearLayout>
-          <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_weight="0.3"
-              android:orientation="vertical"
-              >
-              <android.support.design.widget.TextInputLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_weight="1"
-                  >
-                  <android.support.design.widget.TextInputEditText
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:hint="@string/name"
-                      android:gravity="center"
-                      android:inputType="text"
-                      android:id="@+id/txIn_name"
-                      android:textColor="@color/brown"
-                      android:textColorHint="@color/brown"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="50dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-                      />
-              </android.support.design.widget.TextInputLayout>
-              <android.support.design.widget.TextInputLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_weight="1"
-                  >
-                  <android.support.design.widget.TextInputEditText
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:hint="@string/userName"
-                      android:gravity="center"
-                      android:inputType="text"
-                      android:id="@+id/txIn_userName"
-                      android:textColor="@color/brown"
-                      android:textColorHint="@color/brown"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
 
-                      />
-              </android.support.design.widget.TextInputLayout>
-              <android.support.design.widget.TextInputLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_weight="1"
-                  >
-                  <android.support.design.widget.TextInputEditText
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:hint="@string/email"
-                      android:gravity="center"
-                      android:inputType="textEmailAddress"
-                      android:id="@+id/txIn_email"
-                      android:textColor="@color/brown"
-                      android:textColorHint="@color/brown"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:orientation="vertical">
 
-                      />
-              </android.support.design.widget.TextInputLayout>
-              <android.support.design.widget.TextInputLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_weight="1"
-                  >
-                  <android.support.design.widget.TextInputEditText
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:hint="@string/password"
-                      android:gravity="center"
-                      android:inputType="textPassword"
-                      android:id="@+id/txIn_password"
-                      android:textColor="@color/brown"
-                      android:textColorHint="@color/brown"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-                      />
-              </android.support.design.widget.TextInputLayout>
-              <android.support.design.widget.TextInputLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_weight="1"
-                  >
-                  <android.support.design.widget.TextInputEditText
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:hint="@string/confirmPassword"
-                      android:gravity="center"
-                      android:inputType="textPassword"
-                      android:id="@+id/txIn_confirmPassword"
-                      android:textColor="@color/brown"
-                      android:textColorHint="@color/brown"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txIn_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:hint="@string/name"
+                    android:inputType="text"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
 
-                      />
-              </android.support.design.widget.TextInputLayout>
+                    />
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-              <ImageView
-                  android:layout_marginTop="15dp"
-                  android:id="@+id/bt_signUp"
-                  android:layout_width="100dp"
-                  android:layout_height="50dp"
-                  android:layout_gravity="center"
-                  android:scaleType="fitXY"
-                  android:background="@drawable/btn_signup"
-                  />
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txIn_userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:hint="@string/userName"
+                    android:inputType="text"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
 
-          </LinearLayout>
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txIn_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
+
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txIn_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
+
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txIn_confirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:hint="@string/confirmPassword"
+                    android:inputType="textPassword"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
+
+                    />
+            </android.support.design.widget.TextInputLayout>
 
 
-      </LinearLayout>
+            <ImageView
+                android:id="@+id/bt_signUp"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btn_signup"
+                android:scaleType="fitXY" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

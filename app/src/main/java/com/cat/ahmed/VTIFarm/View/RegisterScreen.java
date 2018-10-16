@@ -14,6 +14,8 @@ import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelSignUp;
 import com.cat.ahmed.VTIFarm.R;
 import com.cat.ahmed.VTIFarm.Retrofit.ApiConnection;
 
+import org.json.JSONObject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -127,17 +129,25 @@ public class RegisterScreen extends AppCompatActivity {
                     public void onResponse(Call<ResultModelSignUp> call, Response<ResultModelSignUp> response) {
                         try {
 
-                            state = response.body().getState();
-                            data = response.body().getData();
-                            if(state.equals("0"))
-                                Toast.makeText(RegisterScreen.this,data,Toast.LENGTH_LONG).show();
-                            else if (state.equals("1"))
-                                Toast.makeText(RegisterScreen.this,"Registration Success",Toast.LENGTH_LONG).show();
+                            if (!response.isSuccessful()) {
+                                try {
+                                    JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                    Toast.makeText(RegisterScreen.this, jObjError.getString("data"), Toast.LENGTH_LONG).show();
+                                } catch (Exception e) {
+                                    Toast.makeText(RegisterScreen.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
 
+                            } else {
+
+                                Toast.makeText(RegisterScreen.this, "Registration Successful, moving you to homepage now.", Toast.LENGTH_LONG).show();
+                                progress.dismiss();
+
+                            }
                             progress.dismiss();
 
                         } // try
                         catch (Exception e) {
+                            Toast.makeText(RegisterScreen.this, response.errorBody().toString(),Toast.LENGTH_LONG).show();
                             Log.i("QP", "exception : " + e.toString());
                             progress.dismiss();
                         } // catch
@@ -145,6 +155,7 @@ public class RegisterScreen extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResultModelSignUp> call, Throwable t) {
+                        Toast.makeText(RegisterScreen.this,data.trim(),Toast.LENGTH_LONG).show();
 
                         Log.i("QP", "error : " + t.toString());
                         progress.dismiss();
@@ -154,5 +165,11 @@ public class RegisterScreen extends AppCompatActivity {
             }
         }.start();
     } // function of SignUpWithApi
+
+    @Override
+    public void onBackPressed() {
+        RegisterScreen.super.onBackPressed();
+    }
+
 
 } // class of RegisterScreen

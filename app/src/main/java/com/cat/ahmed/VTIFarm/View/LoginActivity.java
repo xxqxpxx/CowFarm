@@ -79,7 +79,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.btn_pdf)
+    public  void openPdf()
 
+    {
+        Intent mainIntent = new Intent(LoginActivity.this,pdfviewer.class);
+        LoginActivity.this.startActivity(mainIntent);
+    }
 
 
 
@@ -114,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
         /* Create an Intent that will start the RegisterScreen. */
         Intent mainIntent = new Intent(LoginActivity.this,RegisterScreen.class);
         LoginActivity.this.startActivity(mainIntent);
-        LoginActivity.this.finish();
     } // function of signUp Button
 
 
@@ -166,8 +171,6 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText( LoginActivity.this , e.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             } else {
-
-                                Toast.makeText(LoginActivity.this , "successfully", Toast.LENGTH_LONG).show();
                                 resultModelLogin = response.body();
 
                                 if (chckRemember.isChecked()) {

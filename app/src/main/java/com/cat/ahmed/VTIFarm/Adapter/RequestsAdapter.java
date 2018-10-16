@@ -195,6 +195,8 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.MyView
                                 }
                             } else {
                                 Toast.makeText(context, response.body().getData().trim(), Toast.LENGTH_LONG).show();
+                                resultModelUserRequests.getData().remove(pos);
+                                notifyDataSetChanged();
                             }
 
                             progress.dismiss();

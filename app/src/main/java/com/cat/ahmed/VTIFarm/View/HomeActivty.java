@@ -1,16 +1,26 @@
 package com.cat.ahmed.VTIFarm.View;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.cat.ahmed.VTIFarm.Model.ApiInterface.UserApi;
+import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelBuildingsResponse;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelBuyItem;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelFiterbyResource;
+import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelInventory;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelLogin;
+import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelResources;
+import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelUpgradeRequest;
 import com.cat.ahmed.VTIFarm.Presenter.CustomMarketDialog;
 import com.cat.ahmed.VTIFarm.Presenter.customBuildingDialog;
 import com.cat.ahmed.VTIFarm.Presenter.customPlayerDialog;
@@ -18,8 +28,18 @@ import com.cat.ahmed.VTIFarm.Presenter.customRequestsDialog;
 import com.cat.ahmed.VTIFarm.Presenter.customResourcesDialog;
 import com.cat.ahmed.VTIFarm.Presenter.wrapper;
 import com.cat.ahmed.VTIFarm.R;
+import com.cat.ahmed.VTIFarm.Retrofit.ApiConnection;
+import com.onesignal.OneSignal;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class HomeActivty extends AppCompatActivity implements wrapper {
 
@@ -27,6 +47,8 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
 
     TextView stock_level_count ,factorylevelcount , farm_count_level, hospital_level_count ,  txt_money_count , txt_food_count , txt_medicine_count , txt_animals_count;
     ImageView img_resources ,btn_water,btn_electricity, btn_doctors,btn_farmers,btn_workers,img_requests, img_market , img_stock , img_farm , img_factory , img_hospital , img_profile;
+    RelativeLayout top_player_layout;
+
 
     CustomMarketDialog marketDialog;
     customBuildingDialog buildingDialog;
@@ -41,14 +63,22 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
     List<ResultModelFiterbyResource> resultModelFiterbyResources;
     String userId;
 
-    ResultModelLogin resultModelLogin ;
+    public static ResultModelLogin resultModelLogin ;
     public static ResultModelBuyItem resultModelBuyItem;
+    ResultModelInventory resultModelInventory;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_activty);
+
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
         setupUI();
 
 
@@ -59,95 +89,160 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
 
         initView();
         // getResourcesLists();
+
+
+        // Init
+         final Handler handler = new Handler();
+         Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                getNewUidata();
+                handler.postDelayed(this, 5000);
+            }
+        };
+
+//Start
+        handler.postDelayed(runnable, 1000);
     }
 
-   /* private void getResourcesLists() {
+    private void getNewUidata() {
 
-        for (int i = 1 ; i <= 5 ; ++i)
-            getAlluserWithResource(String.valueOf(i));
-    }*/
 
-/*
-    private void getAlluserWithResource(final String id) {
-
-        progress = new ProgressDialog(this);
-        progress.setTitle(R.string.pleaseWait);
-        progress.setMessage(getString(R.string.loading));
-        progress.setCancelable(false);
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-
-          //      progress.dismiss();
-
+                progress.dismiss();
                 super.handleMessage(msg);
             }
 
         };
 
-     //   progress.show();
         new Thread() {
             public void run() {
                 //Retrofit
                 ApiConnection connection = new ApiConnection();
                 Retrofit retrofit = connection.connectWith();
 
+                final UserApi userApi = retrofit.create(UserApi.class);
 
 
-                final VillageApi marketApi = retrofit.create(VillageApi.class);
+                final Call<ResultModelInventory> getInterestConnection = userApi.getInventory(userId);
 
-                final Call<ResultModelFiterbyResource> getInterestConnection = marketApi.getUsersByResource(id);
-
-                getInterestConnection.enqueue(new Callback<ResultModelFiterbyResource>() {
+                getInterestConnection.enqueue(new Callback<ResultModelInventory>() {
                     @Override
-                    public void onResponse(Call<ResultModelFiterbyResource> call, Response<ResultModelFiterbyResource> response) {
+                    public void onResponse(Call<ResultModelInventory> call, Response<ResultModelInventory> response) {
                         try {
 
                             if (!response.isSuccessful()) {
                                 try {
                                     JSONObject jObjError = new JSONObject(response.errorBody().string());
-                               //     Toast.makeText(context , jObjError.getString("data"), Toast.LENGTH_LONG).show();
                                 } catch (Exception e) {
-                                    //     Toast.makeText( context , e.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             } else {
-
-                           //     Toast.makeText(context , "successfully", Toast.LENGTH_LONG).show();
-                                resultModelFiterbyResources.add(response.body()) ;
-
+                                resultModelInventory = response.body();
+                                updateInventoryUi(resultModelInventory);
                             }
 
-                 //           progress.dismiss();
 
                         } // try
                         catch (Exception e) {
                             Log.i("QP", "exception : " + e.toString());
-               //                      progress.dismiss();
                         } // catch
                     } // onResponse
 
                     @Override
-                    public void onFailure(Call<ResultModelFiterbyResource> call, Throwable t) {
+                    public void onFailure(Call<ResultModelInventory> call, Throwable t) {
                         Log.i("QP", "error : " + t.toString());
-                   //     progress.dismiss();
                     } // on Failure
                 });
                 // Retrofit
             }
         }.start();
 
-    }
-*/
 
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                progress.dismiss();
+                super.handleMessage(msg);
+            }
+
+        };
+
+        new Thread() {
+            public void run() {
+                //Retrofit
+                ApiConnection connection = new ApiConnection();
+                Retrofit retrofit = connection.connectWith();
+
+                final UserApi userApi = retrofit.create(UserApi.class);
+
+
+                final Call<ResultModelResources> getInterestConnection = userApi.getResources(userId);
+
+                getInterestConnection.enqueue(new Callback<ResultModelResources>() {
+                    @Override
+                    public void onResponse(Call<ResultModelResources> call, Response<ResultModelResources> response) {
+                        try {
+
+                            if (!response.isSuccessful()) {
+                                try {
+                                    JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                } catch (Exception e) {
+                                }
+                            } else {
+
+                                updateInventoryUi(response.body());
+                            }
+
+
+                        } // try
+                        catch (Exception e) {
+                            Log.i("QP", "exception : " + e.toString());
+                        } // catch
+                    } // onResponse
+
+                    @Override
+                    public void onFailure(Call<ResultModelResources> call, Throwable t) {
+                        Log.i("QP", "error : " + t.toString());
+                    } // on Failure
+                });
+                // Retrofit
+            }
+        }.start();
+
+
+    }
+
+    private void updateInventoryUi(ResultModelResources body) {
+
+        // on / Off resources
+        if (body.getData().getWater().equals("1"))
+            btn_water.setImageResource(R.drawable.wateron);
+
+        if (body.getData().getElectricity().equals("1"))
+            btn_electricity.setImageResource(R.drawable.electricityon);
+
+        if (body.getData().getDoctors().equals("1"))
+            btn_doctors.setImageResource(R.drawable.doctorson);
+
+        if (body.getData().getFarmers().equals("1"))
+            btn_farmers.setImageResource(R.drawable.farmerson);
+
+        if (body.getData().getWorkers().equals("1"))
+            btn_workers.setImageResource(R.drawable.workerson);
+
+
+    }
 
     private void setupUI() {
 
         img_resources = findViewById(R.id.img_resources);
         img_market = findViewById(R.id.img_market);
         img_requests = findViewById(R.id.img_requests);
-
+        top_player_layout = findViewById(R.id.top_player_layout);
         img_farm = findViewById(R.id.img_farm);
         img_stock = findViewById(R.id.img_stock);
         img_factory = findViewById(R.id.img_factory);
@@ -216,35 +311,37 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         img_farm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buildingDialog = new customBuildingDialog(HomeActivty.this , userId , "farm");
-                buildingDialog.show();
+                goToBuildingInfo("farm");
             }
         });
 
         img_stock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buildingDialog = new customBuildingDialog(HomeActivty.this , userId , "stockyard");
-                buildingDialog.show();
+                goToBuildingInfo("stockyard");
             }
         });
 
         img_factory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buildingDialog = new customBuildingDialog(HomeActivty.this , userId , "factory");
-                buildingDialog.show();
+                goToBuildingInfo("factory");
             }
         });
 
         img_hospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buildingDialog = new customBuildingDialog(HomeActivty.this , userId , "hospital");
-                buildingDialog.show();
+                goToBuildingInfo("hospital");
             }
         });
 
+        top_player_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customPlayerDialog.show();
+            }
+        });
 
 
 
@@ -270,7 +367,7 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
             if (resultModelLogin.getData().getResources().getWater().equals("1"))
                 btn_water.setImageResource(R.drawable.wateron);
 
-            if (resultModelLogin.getData().getResources().getWater().equals("1"))
+            if (resultModelLogin.getData().getResources().getElectricity().equals("1"))
                 btn_electricity.setImageResource(R.drawable.electricityon);
 
             if (resultModelLogin.getData().getResources().getDoctors().equals("1"))
@@ -292,13 +389,83 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         return this;
     }
 
-    @Override
-    public void updateUi(ResultModelBuyItem resultModelBuyItem) {
 
+    @Override
+    public void updateUiCounter(ResultModelBuyItem resultModelBuyItem) {
         txt_money_count.setText(resultModelBuyItem.getData().getGold());
         txt_medicine_count.setText(resultModelBuyItem.getData().getDrug());
         txt_animals_count.setText(resultModelBuyItem.getData().getAnimals());
         txt_food_count.setText(resultModelBuyItem.getData().getFood());
+    }
+
+    @Override
+    public void updateUiBuilding(ResultModelUpgradeRequest body) {
+        updateUiBuildingLevel(userId);
+    }
+
+    private void goToBuildingInfo(String buildingType) {
+        /* Create an Intent that will start the RegisterScreen. */
+        Intent mainIntent = new Intent(HomeActivty.this,BuildingActivity.class);
+        mainIntent.putExtra("type", buildingType);
+        HomeActivty.this.startActivity(mainIntent);
+    }
+
+
+    public void updateInventoryUi(ResultModelInventory resultModelBuyItem) {
+        txt_money_count.setText(resultModelBuyItem.getData().getGold());
+        txt_medicine_count.setText(resultModelBuyItem.getData().getDrug());
+        txt_animals_count.setText(resultModelBuyItem.getData().getAnimals());
+        txt_food_count.setText(resultModelBuyItem.getData().getFood());
+    }
+
+    public void updateUiBuildingLevel(String userId) {
+
+
+        ApiConnection connection = new ApiConnection();
+        Retrofit retrofit = connection.connectWith();
+
+        final UserApi userApi = retrofit.create(UserApi.class);
+
+
+        final Call<ResultModelBuildingsResponse> getInterestConnection = userApi.getBuilding(userId);
+
+        getInterestConnection.enqueue(new Callback<ResultModelBuildingsResponse>() {
+            @Override
+            public void onResponse(Call<ResultModelBuildingsResponse> call, Response<ResultModelBuildingsResponse> response) {
+                try {
+
+                    if (!response.isSuccessful()) {
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        } catch (Exception e) {
+                        }
+                    } else {
+                        updateNewBuildingUI(response.body());
+
+                    }
+
+
+                } // try
+                catch (Exception e) {
+                    Log.i("QP", "exception : " + e.toString());
+                } // catch
+            } // onResponse
+
+            @Override
+            public void onFailure(Call<ResultModelBuildingsResponse> call, Throwable t) {
+                Log.i("QP", "error : " + t.toString());
+            } // on Failure
+        });
+        // Retrofit
+    }
+
+    private void updateNewBuildingUI(ResultModelBuildingsResponse body) {
+        // buildings Levels
+        farm_count_level.setText(body.getData().getFarm());
+        hospital_level_count.setText(body.getData().getHospital());
+        stock_level_count.setText(body.getData().getStockyard());
+        factorylevelcount.setText(body.getData().getFactory());
 
     }
 }
+
