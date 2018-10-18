@@ -49,6 +49,11 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
     ImageView img_resources ,btn_water,btn_electricity, btn_doctors,btn_farmers,btn_workers,img_requests, img_market , img_stock , img_farm , img_factory , img_hospital , img_profile;
     RelativeLayout top_player_layout;
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateUiBuildingLevel(userId);
+    }
 
     CustomMarketDialog marketDialog;
     customBuildingDialog buildingDialog;
@@ -105,6 +110,8 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         handler.postDelayed(runnable, 1000);
     }
 
+
+
     private void getNewUidata() {
 
 
@@ -112,7 +119,6 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                progress.dismiss();
                 super.handleMessage(msg);
             }
 
@@ -165,7 +171,6 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                progress.dismiss();
                 super.handleMessage(msg);
             }
 
@@ -421,43 +426,60 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
     public void updateUiBuildingLevel(String userId) {
 
 
-        ApiConnection connection = new ApiConnection();
-        Retrofit retrofit = connection.connectWith();
-
-        final UserApi userApi = retrofit.create(UserApi.class);
-
-
-        final Call<ResultModelBuildingsResponse> getInterestConnection = userApi.getBuilding(userId);
-
-        getInterestConnection.enqueue(new Callback<ResultModelBuildingsResponse>() {
+        final String  id = userId;
+        handler = new Handler() {
             @Override
-            public void onResponse(Call<ResultModelBuildingsResponse> call, Response<ResultModelBuildingsResponse> response) {
-                try {
+            public void handleMessage(Message msg) {
+                progress.dismiss();
+                super.handleMessage(msg);
+            }
 
-                    if (!response.isSuccessful()) {
+        };
+
+        new Thread() {
+            public void run() {
+
+
+                ApiConnection connection = new ApiConnection();
+                Retrofit retrofit = connection.connectWith();
+
+                final UserApi userApi = retrofit.create(UserApi.class);
+
+
+                final Call<ResultModelBuildingsResponse> getInterestConnection = userApi.getBuilding(id);
+
+                getInterestConnection.enqueue(new Callback<ResultModelBuildingsResponse>() {
+                    @Override
+                    public void onResponse(Call<ResultModelBuildingsResponse> call, Response<ResultModelBuildingsResponse> response) {
                         try {
-                            JSONObject jObjError = new JSONObject(response.errorBody().string());
-                        } catch (Exception e) {
-                        }
-                    } else {
-                        updateNewBuildingUI(response.body());
 
-                    }
+                            if (!response.isSuccessful()) {
+                                try {
+                                    JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                } catch (Exception e) {
+                                }
+                            } else {
+                                updateNewBuildingUI(response.body());
+
+                            }
 
 
-                } // try
-                catch (Exception e) {
-                    Log.i("QP", "exception : " + e.toString());
-                } // catch
-            } // onResponse
+                        } // try
+                        catch (Exception e) {
+                            Log.i("QP", "exception : " + e.toString());
+                        } // catch
+                    } // onResponse
 
-            @Override
-            public void onFailure(Call<ResultModelBuildingsResponse> call, Throwable t) {
-                Log.i("QP", "error : " + t.toString());
-            } // on Failure
-        });
-        // Retrofit
-    }
+                    @Override
+                    public void onFailure(Call<ResultModelBuildingsResponse> call, Throwable t) {
+                        Log.i("QP", "error : " + t.toString());
+                    } // on Failure
+                });
+                // Retrofit
+
+            }
+        }.start();
+            }
 
     private void updateNewBuildingUI(ResultModelBuildingsResponse body) {
         // buildings Levels

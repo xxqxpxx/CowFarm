@@ -15,13 +15,10 @@ import retrofit2.http.POST;
 
 public interface MarketApi {
 
-    @Headers("Content-Type: application/json")
 
     @POST("upgrade-info")
     Call<ResultModelUpgradeInfo> get_building_info(@Body Map<String, String> headers);
 
-    @FormUrlEncoded
-    @Headers("Content-Type: application/json")
     @POST("upgrade")
     Call<ResultModelUpgradeRequest>upgrade_item(@Body Map<String, String> headers);
 

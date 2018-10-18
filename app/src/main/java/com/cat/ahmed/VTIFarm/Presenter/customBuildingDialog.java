@@ -42,7 +42,6 @@ public class customBuildingDialog extends Dialog implements
     Button btn_close, upgrade ;
 
     Handler handler;
-    ProgressDialog progress;
 
     ResultModelUpgradeRequest resultModelUpgradeRequest;
     ResultModelUpgradeInfo resultModelUpgradeInfo;
