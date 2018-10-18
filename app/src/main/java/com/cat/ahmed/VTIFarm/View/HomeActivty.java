@@ -47,7 +47,6 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
 
     TextView stock_level_count ,factorylevelcount , farm_count_level, hospital_level_count ,  txt_money_count , txt_food_count , txt_medicine_count , txt_animals_count;
     ImageView img_resources ,btn_water,btn_electricity, btn_doctors,btn_farmers,btn_workers,img_requests, img_market , img_stock , img_farm , img_factory , img_hospital , img_profile;
-    RelativeLayout top_player_layout;
 
     @Override
     public void onResume(){
@@ -247,7 +246,6 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         img_resources = findViewById(R.id.img_resources);
         img_market = findViewById(R.id.img_market);
         img_requests = findViewById(R.id.img_requests);
-        top_player_layout = findViewById(R.id.top_player_layout);
         img_farm = findViewById(R.id.img_farm);
         img_stock = findViewById(R.id.img_stock);
         img_factory = findViewById(R.id.img_factory);
@@ -340,15 +338,6 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
                 goToBuildingInfo("hospital");
             }
         });
-
-        top_player_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customPlayerDialog.show();
-            }
-        });
-
-
 
     } // intialization of farmDialogs
 

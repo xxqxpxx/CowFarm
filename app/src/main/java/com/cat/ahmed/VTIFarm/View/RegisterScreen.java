@@ -1,6 +1,7 @@
 package com.cat.ahmed.VTIFarm.View;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputEditText;
@@ -139,7 +140,8 @@ public class RegisterScreen extends AppCompatActivity {
 
                             } else {
 
-                                Toast.makeText(RegisterScreen.this, "Registration Successful, moving you to homepage now.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterScreen.this, "Registration Successful, moving you to Login now.", Toast.LENGTH_LONG).show();
+                                goToLogin();
                                 progress.dismiss();
 
                             }
@@ -165,6 +167,15 @@ public class RegisterScreen extends AppCompatActivity {
             }
         }.start();
     } // function of SignUpWithApi
+
+    private void goToLogin() {
+
+        Intent mainIntent = new Intent(RegisterScreen.this , LoginActivity.class);
+        RegisterScreen.this.startActivity(mainIntent);
+        RegisterScreen.this.finish();
+
+
+    }
 
     @Override
     public void onBackPressed() {
