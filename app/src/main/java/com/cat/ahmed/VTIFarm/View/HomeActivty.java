@@ -1,17 +1,19 @@
 package com.cat.ahmed.VTIFarm.View;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cat.ahmed.VTIFarm.Model.ApiInterface.UserApi;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelBuildingsResponse;
@@ -21,6 +23,8 @@ import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelInventory;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelLogin;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelResources;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelUpgradeRequest;
+import com.cat.ahmed.VTIFarm.Model.ResultModel.inventory;
+import com.cat.ahmed.VTIFarm.Model.ResultModel.resources;
 import com.cat.ahmed.VTIFarm.Presenter.CustomMarketDialog;
 import com.cat.ahmed.VTIFarm.Presenter.customBuildingDialog;
 import com.cat.ahmed.VTIFarm.Presenter.customPlayerDialog;
@@ -29,13 +33,20 @@ import com.cat.ahmed.VTIFarm.Presenter.customResourcesDialog;
 import com.cat.ahmed.VTIFarm.Presenter.wrapper;
 import com.cat.ahmed.VTIFarm.R;
 import com.cat.ahmed.VTIFarm.Retrofit.ApiConnection;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.onesignal.OSPermissionSubscriptionState;
 import com.onesignal.OneSignal;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,16 +54,8 @@ import retrofit2.Retrofit;
 
 public class HomeActivty extends AppCompatActivity implements wrapper {
 
-
-
     TextView stock_level_count ,factorylevelcount , farm_count_level, hospital_level_count ,  txt_money_count , txt_food_count , txt_medicine_count , txt_animals_count;
     ImageView img_resources ,btn_water,btn_electricity, btn_doctors,btn_farmers,btn_workers,img_requests, img_market , img_stock , img_farm , img_factory , img_hospital , img_profile;
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        updateUiBuildingLevel(userId);
-    }
 
     CustomMarketDialog marketDialog;
     customBuildingDialog buildingDialog;
@@ -75,7 +78,7 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_activty);
+        setContentView(R.layout.ac);
 
         // OneSignal Initialization
         OneSignal.startInit(this)
@@ -95,7 +98,7 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         // getResourcesLists();
 
 
-        // Init
+      /*  // Init
          final Handler handler = new Handler();
          Runnable runnable = new Runnable() {
             @Override
@@ -105,10 +108,70 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
             }
         };
 
-//Start
-        handler.postDelayed(runnable, 1000);
+            //Start
+        handler.postDelayed(runnable, 1000);*/
+
+
+        changePlayerId();
+
+        // Register to receive messages.
+        // We are registering an observer (mMessageReceiver) to receive Intents
+        // with actions named "custom-event-name".
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("custom-event-name"));
+
     }
 
+
+    // Our handler for received Intents. This will be called whenever an Intent
+    // with an action named "custom-event-name" is broadcasted.
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            String message = intent.getStringExtra("message");
+            String type = intent.getStringExtra("type");
+            Object objects =intent.getExtras().get("data");
+
+            JSONObject data = null;
+            try {
+                data = new JSONObject((String) objects);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Log.d("receiver", "Got message: " + message);
+
+            if (type.equals("inventory")){
+
+                ResultModelInventory resultModelResources = new ResultModelInventory();
+                String mJsonString = data.toString();
+                JsonParser parser = new JsonParser();
+                JsonElement mJson =  parser.parse(mJsonString);
+                Gson gson = new Gson();
+                ResultModelInventory.data object = gson.fromJson(mJson, ResultModelInventory.data.class);
+                resultModelResources.setData(object);
+
+                updateInventoryUi(resultModelResources);
+
+            }
+
+            else if ( type.equals("resources"))
+            {
+                ResultModelResources resultModelResources = new ResultModelResources();
+                String mJsonString = data.toString();
+                JsonParser parser = new JsonParser();
+                JsonElement mJson =  parser.parse(mJsonString);
+                Gson gson = new Gson();
+                ResultModelResources.data object = gson.fromJson(mJson, ResultModelResources.data.class);
+                resultModelResources.setData(object);
+
+                updateResourcesUi(resultModelResources);
+            }
+
+
+        }
+    };
 
 
     private void getNewUidata() {
@@ -198,7 +261,7 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
                                 }
                             } else {
 
-                                updateInventoryUi(response.body());
+                                updateResourcesUi(response.body());
                             }
 
 
@@ -220,7 +283,19 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
 
     }
 
-    private void updateInventoryUi(ResultModelResources body) {
+    private void updateResourcesUi(ResultModelResources body) {
+
+        resources resources = new resources();
+
+        resources.setDoctors( body.getData().getDoctors() );
+        resources.setElectricity( body.getData().getElectricity() );
+        resources.setFarmers( body.getData().getFarmers() );
+        resources.setWater( body.getData().getWater() );
+        resources.setWorkers( body.getData().getWorkers() );
+
+
+        resultModelLogin.data.setResources(resources);
+
 
         // on / Off resources
         if (body.getData().getWater().equals("1"))
@@ -406,6 +481,17 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
 
 
     public void updateInventoryUi(ResultModelInventory resultModelBuyItem) {
+
+        inventory inventory = new inventory();
+
+        inventory.setAnimals(resultModelBuyItem.getData().getAnimals());
+        inventory.setDrug(resultModelBuyItem.getData().getDrug());
+        inventory.setFood(resultModelBuyItem.getData().getFood());
+        inventory.setGold(resultModelBuyItem.getData().getGold());
+
+        resultModelLogin.data.setInventory(inventory);
+
+
         txt_money_count.setText(resultModelBuyItem.getData().getGold());
         txt_medicine_count.setText(resultModelBuyItem.getData().getDrug());
         txt_animals_count.setText(resultModelBuyItem.getData().getAnimals());
@@ -433,7 +519,6 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
                 Retrofit retrofit = connection.connectWith();
 
                 final UserApi userApi = retrofit.create(UserApi.class);
-
 
                 final Call<ResultModelBuildingsResponse> getInterestConnection = userApi.getBuilding(id);
 
@@ -478,5 +563,86 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         factorylevelcount.setText(body.getData().getFactory());
 
     }
+
+
+    public void changePlayerId() {
+
+
+        ApiConnection connection = new ApiConnection();
+        Retrofit retrofit = connection.connectWith();
+
+        final UserApi userApi = retrofit.create(UserApi.class);
+
+
+        final HashMap<String, String> data = new HashMap<>();
+
+
+
+        OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+        status.getPermissionStatus().getEnabled();
+
+        String playerId = status.getSubscriptionStatus().getUserId();
+        Log.d("PlayerId", playerId);
+
+
+        data.put("user_id", userId);
+        data.put("player_id", playerId);
+
+        final Call<ResponseBody> getInterestConnection = userApi.updatePlayerId(data);
+
+
+//            dialog.show();
+        getInterestConnection.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String message = null;
+                int state = 0;
+                try {
+                    JSONObject res = new JSONObject(response.body().string());
+                    message = res.getString("Message");
+                    state = res.getInt("state");
+                    Log.d("Response", message + state);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (state == 0) {
+//                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                } else if (state == 1) {
+//                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+
+
+        });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        setdata(resultModelLogin);
+    }
+
+
+    @Override
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+      //  LocalBroadcastManager.getInstance(this).unregisterReceiver(mMyBroadcastReceiver);
+    }
+
+    @Override
+    protected void onDestroy() {
+        // Unregister since the activity is about to be closed.
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+        super.onDestroy();
+    }
+
 }
 

@@ -1,6 +1,7 @@
 package com.cat.ahmed.VTIFarm.Model.ApiInterface;
 
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelBuildingsResponse;
+import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelGeneric;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelInventory;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelLogin;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelResources;
@@ -9,6 +10,7 @@ import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelTopPlayer;
 
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -22,8 +24,7 @@ public interface UserApi {
 
     @Headers("Content-Type: application/json")
     @POST("login")
-    retrofit2.Call<ResultModelLogin> login(@Body Map<String, String> headers
-    );  // Login
+    retrofit2.Call<ResultModelLogin> login(@Body Map<String, String> headers);  // Login
 
     @FormUrlEncoded
     @POST("register")
@@ -55,6 +56,10 @@ public interface UserApi {
 
     @GET("top-users")
     Call<ResultModelTopPlayer> getTopPLayers();
+
+
+    @POST("player_id")
+    Call<ResponseBody> updatePlayerId(@Body Map<String, String> headers);
 
 
 } // Interface of LoginAPI

@@ -13,13 +13,21 @@ public class ResultModelResources {
         return data;
     }
 
+    public void setData(ResultModelResources.data data) {
+        this.data = data;
+    }
+
     public String getState() {
         return state;
     }
 
-    public class data{
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public class data {
         @SerializedName("id")
-        public  String id;
+        public String id;
         @SerializedName("user_id")
         public String user_id;
         @SerializedName("water")

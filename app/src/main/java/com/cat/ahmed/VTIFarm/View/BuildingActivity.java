@@ -16,6 +16,8 @@ import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelBuyItem;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelFiterbyResource;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelLogin;
 import com.cat.ahmed.VTIFarm.Model.ResultModel.ResultModelUpgradeRequest;
+import com.cat.ahmed.VTIFarm.Model.ResultModel.buildings;
+import com.cat.ahmed.VTIFarm.Model.ResultModel.inventory;
 import com.cat.ahmed.VTIFarm.Presenter.CustomMarketDialog;
 import com.cat.ahmed.VTIFarm.Presenter.customBuildingDialog;
 import com.cat.ahmed.VTIFarm.Presenter.customPlayerDialog;
@@ -51,7 +53,6 @@ public class BuildingActivity extends AppCompatActivity  implements wrapper {
     List<ResultModelFiterbyResource> resultModelFiterbyResources;
     String userId;
 
-    ResultModelLogin resultModelLogin ;
     public static ResultModelBuyItem resultModelBuyItem;
 
 
@@ -67,8 +68,7 @@ public class BuildingActivity extends AppCompatActivity  implements wrapper {
 
         // Get User Inventory
 
-        resultModelLogin = HomeActivty.resultModelLogin;
-        setdata(resultModelLogin);
+        setdata(HomeActivty.resultModelLogin);
 
         initView();
 
@@ -285,7 +285,7 @@ public class BuildingActivity extends AppCompatActivity  implements wrapper {
                     building_img.setImageResource(R.drawable.factory_level7);
 
                 else
-                    building_img.setImageResource(R.drawable.stock_level8);
+                    building_img.setImageResource(R.drawable.factory_level8);
 
             }
             // on / Off resources
@@ -316,6 +316,16 @@ public class BuildingActivity extends AppCompatActivity  implements wrapper {
 
     @Override
     public void updateUiCounter(ResultModelBuyItem resultModelBuyItem) {
+
+        inventory inventory = new inventory();
+
+        inventory.setAnimals(resultModelBuyItem.getData().getAnimals());
+        inventory.setDrug(resultModelBuyItem.getData().getDrug());
+        inventory.setFood(resultModelBuyItem.getData().getFood());
+        inventory.setGold(resultModelBuyItem.getData().getGold());
+
+        HomeActivty.resultModelLogin.data.setInventory(inventory);
+
         txt_money_count.setText(resultModelBuyItem.getData().getGold());
         txt_medicine_count.setText(resultModelBuyItem.getData().getDrug());
         txt_animals_count.setText(resultModelBuyItem.getData().getAnimals());
@@ -371,6 +381,16 @@ public class BuildingActivity extends AppCompatActivity  implements wrapper {
 
 
     private void updateNewBuildingUI(ResultModelBuildingsResponse body) {
+
+
+         buildings buildings = new buildings();
+
+        buildings.setFactory(body.getData().getFactory());
+        buildings.setFarm(body.getData().getFarm());
+        buildings.setHospital(body.getData().getHospital());
+        buildings.setStockyard(body.getData().getStockyard());
+
+        HomeActivty.resultModelLogin.data.setBuildings(buildings);
 
 
 
@@ -495,10 +515,9 @@ public class BuildingActivity extends AppCompatActivity  implements wrapper {
                 building_img.setImageResource(R.drawable.factory_level7);
 
             else
-                building_img.setImageResource(R.drawable.stock_level8);
-
-        }
-
-
+                building_img.setImageResource(R.drawable.factory_level8);
+            }
     }
+
+
 }

@@ -13,7 +13,7 @@ public class ResultModelInventory {
         return data;
     }
 
-    public void setData(ResultModelInventory.data data) {
+    public  void setData(ResultModelInventory.data data) {
         this.data = data;
     }
 
@@ -25,9 +25,9 @@ public class ResultModelInventory {
         this.state = state;
     }
 
-    public class data{
+    public class data {
         @SerializedName("id")
-        public  String id;
+        public String id;
         @SerializedName("user_id")
         public String user_id;
         @SerializedName("drug")
@@ -86,5 +86,7 @@ public class ResultModelInventory {
         public void setGold(String gold) {
             this.gold = gold;
         }
+
+
     }
 }

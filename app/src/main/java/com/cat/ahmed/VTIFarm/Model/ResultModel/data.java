@@ -153,4 +153,7 @@ public class data {
     public void setNotifications(List<NotificationsModel> notifications) {
         this.notifications = notifications;
     }
+
+
+
 }

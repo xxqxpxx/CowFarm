@@ -9,6 +9,8 @@ public class ResultModelLogin {
     @SerializedName("state")
     public String state;
 
+
+
     public data getData() {
         return data;
     }
