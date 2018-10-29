@@ -43,7 +43,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.MyViewHold
 
         final int pos = position;
         holder.txt_name.setText(resultModelUserRequests.getData().get(position).getUsername());
-        holder.txt_rank.setText(resultModelUserRequests.getData().get(position).getId());
+        holder.txt_rank.setText(String.valueOf(pos+1));
         holder.txt_animals_count.setText(resultModelUserRequests.getData().get(position).getAnimals());
         holder.txt_food_count.setText(resultModelUserRequests.getData().get(position).getFood());
         holder.txt_medicine_count.setText(resultModelUserRequests.getData().get(position).getDrug());

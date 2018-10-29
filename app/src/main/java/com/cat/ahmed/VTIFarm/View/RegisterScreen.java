@@ -157,7 +157,7 @@ public class RegisterScreen extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResultModelSignUp> call, Throwable t) {
-                        Toast.makeText(RegisterScreen.this,data.trim(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterScreen.this, data.trim() ,Toast.LENGTH_LONG).show();
 
                         Log.i("QP", "error : " + t.toString());
                         progress.dismiss();

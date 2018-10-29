@@ -13,8 +13,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.cat.ahmed.VTIFarm.Adapter.ResourceAdapter;
 import com.cat.ahmed.VTIFarm.Model.ApiInterface.VillageApi;
@@ -32,23 +36,27 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static com.cat.ahmed.VTIFarm.View.HomeActivty.resultModelLogin;
+
 public class customResourcesDialog extends Dialog implements
         android.view.View.OnClickListener {
 
     public Activity context;
     String userId;
     public Dialog d;
-    public ImageView btn_water, btn_electricity, btn_doctors, btn_farmers, btn_workers;
+    public ImageView btn_water, btn_electricity, btn_doctors, btn_farmers, btn_workers ;
+    Button btn_close;
     FrameLayout container;
 
     String resourceId;
     Handler handler;
-    ProgressDialog progress;
+    ProgressBar progress;
     ResultModelFiterbyResource resultModelFiterbyResource;
 
     RecyclerView rcvOffers;
     ResourceAdapter adapter;
-
+    TextView myempty;
+    LinearLayout requests_layout;
     List<ResultModelFiterbyResource> resultModelFiterbyResources;
 
     public customResourcesDialog(Activity a, String userId, List<ResultModelFiterbyResource> resultModelFiterbyResources) {
@@ -72,6 +80,9 @@ public class customResourcesDialog extends Dialog implements
 
         rcvOffers = findViewById(R.id.rcv_layout);
 
+        myempty = findViewById(R.id.mytxtEmpty);
+        requests_layout = findViewById(R.id.requests_layout);
+
         getAlluserWithResourceNow("1");
 
         btn_water = findViewById(R.id.btn_water);
@@ -79,14 +90,16 @@ public class customResourcesDialog extends Dialog implements
         btn_doctors = findViewById(R.id.btn_doctors);
         btn_farmers = findViewById(R.id.btn_farmers);
         btn_workers = findViewById(R.id.btn_workers);
+        btn_close = findViewById(R.id.btn_close);
         //  container = findViewById(R.id.container);
+        progress = findViewById(R.id.progressBar);
 
         btn_water.setOnClickListener(this);
         btn_electricity.setOnClickListener(this);
         btn_doctors.setOnClickListener(this);
         btn_farmers.setOnClickListener(this);
         btn_workers.setOnClickListener(this);
-
+        btn_close.setOnClickListener(this);
 
         // startًWaterFragment();
 
@@ -105,7 +118,6 @@ public class customResourcesDialog extends Dialog implements
             case R.id.btn_water:
                 getAlluserWithResourceNow("1");
                 btn_water.setImageResource(R.drawable.resource_water_on);
-
                 btn_electricity.setImageResource(R.drawable.resource_elec_off);
                 btn_doctors.setImageResource(R.drawable.resource_doc_off);
                 btn_farmers.setImageResource(R.drawable.resource_farmer_off);
@@ -175,13 +187,17 @@ public class customResourcesDialog extends Dialog implements
         adapter = new ResourceAdapter(context, resultModelUserRequests, userId, id);
         rcvOffers.setAdapter(adapter);
         rcvOffers.setLayoutManager(new LinearLayoutManager(context));
-
+/*
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
 
 
         rcvOffers.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.HORIZONTAL));
+                DividerItemDecoration.HORIZONTAL));*/
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
+        rcvOffers.addItemDecoration(dividerItemDecoration);
+
 
         rcvOffers.setHasFixedSize(true);
 
@@ -190,37 +206,85 @@ public class customResourcesDialog extends Dialog implements
 
     private void getAlluserWithResourceNow(final String id) {
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        boolean alreadyhaveResource = false ;
+
+        if  (id.equals("1") ){
+            if  (resultModelLogin.getData().getResources().getWater().equals("1"))
+            {
+                alreadyhaveResource = true ;
+            }
+
+        }else if (id.equals("2")){
+            if  (resultModelLogin.getData().getResources().getElectricity().equals("1")){
+                alreadyhaveResource = true ;
+            }
+        }else if (id.equals("3")){
+            if  (resultModelLogin.getData().getResources().getWorkers().equals("1")){
+                alreadyhaveResource = true ;
+            }
+        }else if (id.equals("4")){
+            if  (resultModelLogin.getData().getResources().getDoctors().equals("1")){
+                alreadyhaveResource = true ;
+            }
+        }else if (id.equals("5")){
+            if  (resultModelLogin.getData().getResources().getFarmers().equals("1")){
+                alreadyhaveResource = true ;
+            }
+        }
 
 
-                //Retrofit
-                ApiConnection connection = new ApiConnection();
-                Retrofit retrofit = connection.connectWith();
 
-                final VillageApi marketApi = retrofit.create(VillageApi.class);
+        if (alreadyhaveResource)
+        {
+            myempty.setVisibility(View.VISIBLE);
+            requests_layout.setVisibility(View.INVISIBLE);
+        }
 
-                final Call<ResultModelFiterbyResource> getInterestConnection = marketApi.getUsersByResource(id , userId);
 
-                Response<ResultModelFiterbyResource> response = null;
+        else {
+
+            progress.setVisibility(View.VISIBLE);
+            requests_layout.setVisibility(View.VISIBLE);
+             myempty.setVisibility(View.GONE);
+
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+
+
+
+            //Retrofit
+            ApiConnection connection = new ApiConnection();
+            Retrofit retrofit = connection.connectWith();
+
+            final VillageApi marketApi = retrofit.create(VillageApi.class);
+
+            final Call<ResultModelFiterbyResource> getInterestConnection = marketApi.getUsersByResource(id, userId);
+
+            Response<ResultModelFiterbyResource> response = null;
+            try {
+                response = getInterestConnection.execute();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (!response.isSuccessful()) {
                 try {
-                    response = getInterestConnection.execute();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    JSONObject jObjError = new JSONObject(response.errorBody().string());
+                    //     Toast.makeText(getContext(), jObjError.getString("data"), Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    //     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
+            } else {
+                //  Toast.makeText(context, "successfully", Toast.LENGTH_LONG).show();
+                resultModelFiterbyResource = response.body();
+                setData(resultModelFiterbyResource, id);
+            }
 
-                if (!response.isSuccessful()) {
-                    try {
-                        JSONObject jObjError = new JSONObject(response.errorBody().string());
-                        //     Toast.makeText(getContext(), jObjError.getString("data"), Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        //     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    //  Toast.makeText(context, "successfully", Toast.LENGTH_LONG).show();
-                    resultModelFiterbyResource = response.body();
-                    setData(resultModelFiterbyResource, id);
-                }
+            progress.setVisibility(View.GONE);
+        }
+
+
     }
 }

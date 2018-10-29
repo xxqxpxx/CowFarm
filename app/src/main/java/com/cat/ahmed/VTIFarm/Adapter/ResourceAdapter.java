@@ -75,6 +75,9 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.MyView
             }
         });
 
+        if (resultModelFiterbyResource.getData().get(pos).getBtn().equals("reminder"))
+            holder.btn_request.setBackgroundResource(R.drawable.reminder);
+
     }
 
     @Override
@@ -84,7 +87,8 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        Button btn_request;
+
+       Button btn_request;
        TextView txIn_userName;
 
         public MyViewHolder(View itemView) {
@@ -148,7 +152,7 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.MyView
                                 }
                             } else {
                                 Toast.makeText(context, response.body().getData().trim(), Toast.LENGTH_LONG).show();
-                            }
+                             }
 
                             progress.dismiss();
 

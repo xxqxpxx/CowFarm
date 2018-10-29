@@ -5,16 +5,13 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.cat.ahmed.VTIFarm.Presenter.Helper;
-import com.cat.ahmed.VTIFarm.Presenter.wrapper;
-import com.google.gson.JsonObject;
 import com.onesignal.NotificationExtenderService;
 import com.onesignal.OSNotificationReceivedResult;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class NotificationService  extends NotificationExtenderService {
+public class NotificationService extends NotificationExtenderService {
 
     @Override
     protected boolean onNotificationProcessing(OSNotificationReceivedResult receivedResult) {
@@ -27,26 +24,25 @@ public class NotificationService  extends NotificationExtenderService {
         JSONObject data = null;
         JSONObject jsonObject = receivedResult.payload.additionalData;
         try {
-             data = jsonObject.getJSONObject("data");
+            data = jsonObject.getJSONObject("data");
         } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
-             type = jsonObject.getString("type");
+            type = jsonObject.getString("type");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-        if (type.equals("inventory") || type.equals("resources"))
-        {
+        if (type.equals("inventory") || type.equals("resources")) {
             if (Helper.isAppRunning(getApplicationContext(), "com.cat.ahmed.cowfarm")) {
                 // App is running // update UI
                 // updateUI
                 /*Intent gcm_rec = new Intent("your_action");
                 LocalBroadcastManager.getInstance(arg0).sendBroadcast(gcm_rec);*/
 
-                updateUI(data , type);
+                updateUI(data, type);
 
             } else {
                 // App is not running

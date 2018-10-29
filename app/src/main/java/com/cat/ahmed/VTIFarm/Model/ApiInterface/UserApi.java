@@ -62,5 +62,9 @@ public interface UserApi {
     Call<ResponseBody> updatePlayerId(@Body Map<String, String> headers);
 
 
+    @POST("user-flag")
+    Call<Object> updateNotificationStatus(@Body Map<String, String> headers);
+
+
 } // Interface of LoginAPI
 

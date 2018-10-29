@@ -5,11 +5,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,7 +44,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -54,26 +53,67 @@ import retrofit2.Retrofit;
 
 public class HomeActivty extends AppCompatActivity implements wrapper {
 
-    TextView stock_level_count ,factorylevelcount , farm_count_level, hospital_level_count ,  txt_money_count , txt_food_count , txt_medicine_count , txt_animals_count;
-    ImageView img_resources ,btn_water,btn_electricity, btn_doctors,btn_farmers,btn_workers,img_requests, img_market , img_stock , img_farm , img_factory , img_hospital , img_profile;
-
+    public static String item, count;
+    public static ResultModelLogin resultModelLogin;
+    public static ResultModelBuyItem resultModelBuyItem;
+    TextView stock_level_count, factorylevelcount, farm_count_level, hospital_level_count, txt_money_count, txt_food_count, txt_medicine_count, txt_animals_count;
+    ImageView img_resources, btn_water, btn_electricity, btn_doctors, btn_farmers, btn_workers, img_requests, img_market, img_stock, img_farm, img_factory, img_hospital, img_profile;
     CustomMarketDialog marketDialog;
     customBuildingDialog buildingDialog;
     customResourcesDialog resourceDialog;
     customRequestsDialog requestsDialog;
     customPlayerDialog customPlayerDialog;
-    public static String item , count;
-
-
     Handler handler;
     ProgressDialog progress;
     List<ResultModelFiterbyResource> resultModelFiterbyResources;
     String userId;
-
-    public static ResultModelLogin resultModelLogin ;
-    public static ResultModelBuyItem resultModelBuyItem;
     ResultModelInventory resultModelInventory;
+    // Our handler for received Intents. This will be called whenever an Intent
+    // with an action named "custom-event-name" is broadcasted.
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            String message = intent.getStringExtra("message");
+            String type = intent.getStringExtra("type");
+            Object objects = intent.getExtras().get("data");
 
+            JSONObject data = null;
+            try {
+                data = new JSONObject((String) objects);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Log.d("receiver", "Got message: " + message);
+
+            if (type.equals("inventory")) {
+
+                ResultModelInventory resultModelResources = new ResultModelInventory();
+                String mJsonString = data.toString();
+                JsonParser parser = new JsonParser();
+                JsonElement mJson = parser.parse(mJsonString);
+                Gson gson = new Gson();
+                ResultModelInventory.data object = gson.fromJson(mJson, ResultModelInventory.data.class);
+                resultModelResources.setData(object);
+
+                updateInventoryUi(resultModelResources);
+
+            } else if (type.equals("resources")) {
+                ResultModelResources resultModelResources = new ResultModelResources();
+                String mJsonString = data.toString();
+                JsonParser parser = new JsonParser();
+                JsonElement mJson = parser.parse(mJsonString);
+                Gson gson = new Gson();
+                ResultModelResources.data object = gson.fromJson(mJson, ResultModelResources.data.class);
+                resultModelResources.setData(object);
+
+                updateResourcesUi(resultModelResources);
+            }
+
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +132,15 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         // Get User Inventory
 
         resultModelLogin = LoginActivity.resultModelLogin;
-        setdata(resultModelLogin);
+
+        if (resultModelLogin!=null) {
+            setdata(resultModelLogin);
+
+        }
+
+        else{
+            goToLogin();
+        }
 
         initView();
         // getResourcesLists();
@@ -112,7 +160,7 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         handler.postDelayed(runnable, 1000);*/
 
 
-        changePlayerId();
+        changePlayerID();
 
         // Register to receive messages.
         // We are registering an observer (mMessageReceiver) to receive Intents
@@ -122,60 +170,16 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
 
     }
 
+    private void goToLogin() {
 
-    // Our handler for received Intents. This will be called whenever an Intent
-    // with an action named "custom-event-name" is broadcasted.
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // Get extra data included in the Intent
-            String message = intent.getStringExtra("message");
-            String type = intent.getStringExtra("type");
-            Object objects =intent.getExtras().get("data");
-
-            JSONObject data = null;
-            try {
-                data = new JSONObject((String) objects);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            Log.d("receiver", "Got message: " + message);
-
-            if (type.equals("inventory")){
-
-                ResultModelInventory resultModelResources = new ResultModelInventory();
-                String mJsonString = data.toString();
-                JsonParser parser = new JsonParser();
-                JsonElement mJson =  parser.parse(mJsonString);
-                Gson gson = new Gson();
-                ResultModelInventory.data object = gson.fromJson(mJson, ResultModelInventory.data.class);
-                resultModelResources.setData(object);
-
-                updateInventoryUi(resultModelResources);
-
-            }
-
-            else if ( type.equals("resources"))
-            {
-                ResultModelResources resultModelResources = new ResultModelResources();
-                String mJsonString = data.toString();
-                JsonParser parser = new JsonParser();
-                JsonElement mJson =  parser.parse(mJsonString);
-                Gson gson = new Gson();
-                ResultModelResources.data object = gson.fromJson(mJson, ResultModelResources.data.class);
-                resultModelResources.setData(object);
-
-                updateResourcesUi(resultModelResources);
-            }
+        Intent mainIntent = new Intent(HomeActivty.this,LoginActivity.class);
+        HomeActivty.this.startActivity(mainIntent);
+        HomeActivty.this.finish();
 
 
-        }
-    };
-
+    }
 
     private void getNewUidata() {
-
 
 
         handler = new Handler() {
@@ -227,7 +231,6 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
                 // Retrofit
             }
         }.start();
-
 
 
         handler = new Handler() {
@@ -287,11 +290,11 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
 
         resources resources = new resources();
 
-        resources.setDoctors( body.getData().getDoctors() );
-        resources.setElectricity( body.getData().getElectricity() );
-        resources.setFarmers( body.getData().getFarmers() );
-        resources.setWater( body.getData().getWater() );
-        resources.setWorkers( body.getData().getWorkers() );
+        resources.setDoctors(body.getData().getDoctors());
+        resources.setElectricity(body.getData().getElectricity());
+        resources.setFarmers(body.getData().getFarmers());
+        resources.setWater(body.getData().getWater());
+        resources.setWorkers(body.getData().getWorkers());
 
 
         resultModelLogin.data.setResources(resources);
@@ -337,31 +340,30 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         farm_count_level = findViewById(R.id.farm_count_level);
         factorylevelcount = findViewById(R.id.factorylevelcount);
 
-            btn_water= findViewById(R.id.btn_water);
-            btn_electricity= findViewById(R.id.btn_electricity);
-            btn_doctors= findViewById(R.id.btn_doctors);
-            btn_farmers= findViewById(R.id.btn_farmers);
-            btn_workers= findViewById(R.id.btn_workers);
+        btn_water = findViewById(R.id.btn_water);
+        btn_electricity = findViewById(R.id.btn_electricity);
+        btn_doctors = findViewById(R.id.btn_doctors);
+        btn_farmers = findViewById(R.id.btn_farmers);
+        btn_workers = findViewById(R.id.btn_workers);
     }
 
-    private  void initView()
-    {
+    private void initView() {
 
 
-        marketDialog = new CustomMarketDialog(this , userId );
+        marketDialog = new CustomMarketDialog(this, userId);
 
 
-        resourceDialog = new customResourcesDialog(this , userId , resultModelFiterbyResources);
-        requestsDialog= new customRequestsDialog(this , userId);
+        resourceDialog = new customResourcesDialog(this, userId, resultModelFiterbyResources);
+        requestsDialog = new customRequestsDialog(this, userId);
 
-        customPlayerDialog = new customPlayerDialog(this , userId);
+        customPlayerDialog = new customPlayerDialog(this, userId);
 
         img_resources.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            resourceDialog.show();
-        }
-      });
+            @Override
+            public void onClick(View v) {
+                resourceDialog.show();
+            }
+        });
 
         img_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -369,7 +371,6 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
                 customPlayerDialog.show();
             }
         });
-
 
 
         img_market.setOnClickListener(new View.OnClickListener() {
@@ -474,7 +475,7 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
 
     private void goToBuildingInfo(String buildingType) {
         /* Create an Intent that will start the RegisterScreen. */
-        Intent mainIntent = new Intent(HomeActivty.this,BuildingActivity.class);
+        Intent mainIntent = new Intent(HomeActivty.this, BuildingActivity.class);
         mainIntent.putExtra("type", buildingType);
         HomeActivty.this.startActivity(mainIntent);
     }
@@ -501,7 +502,7 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
     public void updateUiBuildingLevel(String userId) {
 
 
-        final String  id = userId;
+        final String id = userId;
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -553,7 +554,7 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
 
             }
         }.start();
-            }
+    }
 
     private void updateNewBuildingUI(ResultModelBuildingsResponse body) {
         // buildings Levels
@@ -565,7 +566,7 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
     }
 
 
-    public void changePlayerId() {
+    public void changePlayerID() {
 
 
         ApiConnection connection = new ApiConnection();
@@ -577,12 +578,11 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         final HashMap<String, String> data = new HashMap<>();
 
 
-
         OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
         status.getPermissionStatus().getEnabled();
 
         String playerId = status.getSubscriptionStatus().getUserId();
-        Log.d("PlayerId", playerId);
+        //   Log.d("PlayerId", playerId);
 
 
         data.put("user_id", userId);
@@ -623,9 +623,60 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
         });
     }
 
+
+    public void updateBackgroundNotificationStatus(String s) {
+
+        ApiConnection connection = new ApiConnection();
+        Retrofit retrofit = connection.connectWith();
+
+        final UserApi userApi = retrofit.create(UserApi.class);
+
+        final HashMap<String, String> data = new HashMap<>();
+
+
+        data.put("user_id", userId);
+        data.put("flag", s);
+
+        final Call<Object> getInterestConnection = userApi.updateNotificationStatus(data);
+
+
+//            dialog.show();
+        getInterestConnection.enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                String message = null;
+                int state = 0;
+                try {
+                    JSONObject res = new JSONObject(response.toString());
+                    message = res.getString("Message");
+                    state = res.getInt("state");
+                    Log.d("Response", message + state);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (state == 0) {
+//                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                } else if (state == 1) {
+//                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+
+            }
+
+
+        });
+    }
+
+
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
+        updateBackgroundNotificationStatus("1");
         setdata(resultModelLogin);
     }
 
@@ -633,14 +684,17 @@ public class HomeActivty extends AppCompatActivity implements wrapper {
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
+        updateBackgroundNotificationStatus("0");
+
         super.onPause();
-      //  LocalBroadcastManager.getInstance(this).unregisterReceiver(mMyBroadcastReceiver);
+        //  LocalBroadcastManager.getInstance(this).unregisterReceiver(mMyBroadcastReceiver);
     }
 
     @Override
     protected void onDestroy() {
         // Unregister since the activity is about to be closed.
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+        updateBackgroundNotificationStatus("0");
         super.onDestroy();
     }
 

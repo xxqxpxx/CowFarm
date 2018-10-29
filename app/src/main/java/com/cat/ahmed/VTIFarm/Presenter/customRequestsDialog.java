@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +27,14 @@ import com.cat.ahmed.VTIFarm.R;
 import com.cat.ahmed.VTIFarm.Retrofit.ApiConnection;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import static com.cat.ahmed.VTIFarm.View.HomeActivty.resultModelLogin;
 
 public class customRequestsDialog  extends Dialog implements
         android.view.View.OnClickListener {
@@ -43,12 +48,14 @@ public class customRequestsDialog  extends Dialog implements
     Button btn_close ;
 
     Handler handler;
-    ProgressDialog progress;
+    ProgressBar progress;
 
     ResultModelUserRequests resultModelUserRequests;
 
     RecyclerView rcvOffers;
     RequestsAdapter adapter;
+    TextView myempty , requests_title;
+    LinearLayout requests_layout;
 
     public customRequestsDialog(Activity a , String userId ) {
         super(a);
@@ -66,10 +73,13 @@ public class customRequestsDialog  extends Dialog implements
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         rcvOffers =  findViewById(R.id.rcv_layout );
-
         btn_close  =  findViewById(R.id.btn_close);
+        myempty = findViewById(R.id.mytxtEmpty);
+        requests_layout = findViewById(R.id.requests_layout);
+        requests_title = findViewById(R.id.requests_title);
+        progress = findViewById(R.id.progressBar);
 
-
+        requests_title.setText(resultModelLogin.getData().getVillage().getName() + " Resource");
         getUserReceivedRequests();
 
 
@@ -78,21 +88,23 @@ public class customRequestsDialog  extends Dialog implements
 
     private void getUserReceivedRequests() {
 
-        progress = new ProgressDialog(c);
+     /*   progress = new ProgressDialog(c);
         progress.setTitle(R.string.pleaseWait);
         progress.setMessage(c.getString(R.string.loading));
         progress.setCancelable(false);
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);*/
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                progress.dismiss();
+                progress.setVisibility(View.GONE);
                 super.handleMessage(msg);
             }
 
         };
-        progress.show();
+
+        progress.setVisibility(View.VISIBLE);
+
         new Thread() {
             public void run() {
                 //Retrofit
@@ -117,22 +129,34 @@ public class customRequestsDialog  extends Dialog implements
                                 }
                             } else {
                                 resultModelUserRequests = response.body();
-                                setData(resultModelUserRequests);
+
+                                if (resultModelUserRequests.getData().size() == 0)
+                                {
+                                    myempty.setVisibility(View.VISIBLE);
+                                    requests_layout.setVisibility(View.GONE);
+                                }
+                                else {
+                                    requests_layout.setVisibility(View.VISIBLE);
+                                    setData(resultModelUserRequests);
+                                    myempty.setVisibility(View.GONE);
+
+                                }
                             }
 
-                            progress.dismiss();
+
+                            progress.setVisibility(View.GONE);
 
                         } // try
                         catch (Exception e) {
                             Log.i("QP", "exception : " + e.toString());
-                            progress.dismiss();
+                            progress.setVisibility(View.GONE);
                         } // catch
                     } // onResponse
 
                     @Override
                     public void onFailure(Call<ResultModelUserRequests> call, Throwable t) {
                         Log.i("QP", "error : " + t.toString());
-                        progress.dismiss();
+                        progress.setVisibility(View.GONE);
                     } // on Failure
                 });
                 // Retrofit
@@ -147,14 +171,22 @@ public class customRequestsDialog  extends Dialog implements
         rcvOffers.setAdapter(adapter);
         rcvOffers.setLayoutManager(new LinearLayoutManager(c));
 
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+       /* DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
 
 
         rcvOffers.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.HORIZONTAL));
+                DividerItemDecoration.HORIZONTAL));*/
+
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
+        rcvOffers.addItemDecoration(dividerItemDecoration);
+
+
 
         rcvOffers.setHasFixedSize(true);
+
+
 
     }
 
@@ -170,7 +202,6 @@ public class customRequestsDialog  extends Dialog implements
             default:
                 break;
         }
-        dismiss();
     }
 }
 

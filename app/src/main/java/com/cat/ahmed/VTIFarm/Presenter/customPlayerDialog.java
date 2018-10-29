@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ public class customPlayerDialog  extends Dialog implements
     Button btn_close ;
 
     Handler handler;
-    ProgressDialog progress;
+    ProgressBar progress;
 
     ResultModelTopPlayer resultModelTopPlayer;
 
@@ -68,6 +69,7 @@ public class customPlayerDialog  extends Dialog implements
         rcvOffers =  findViewById(R.id.rcv_layout );
 
         btn_close  =  findViewById(R.id.btn_close);
+        progress = findViewById(R.id.progressBar);
 
 
         getTopPlayers();
@@ -78,21 +80,23 @@ public class customPlayerDialog  extends Dialog implements
 
     private void getTopPlayers() {
 
-        progress = new ProgressDialog(c);
+      /*  progress = new ProgressDialog(c);
         progress.setTitle(R.string.pleaseWait);
         progress.setMessage(c.getString(R.string.loading));
         progress.setCancelable(false);
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);*/
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                progress.dismiss();
+                progress.setVisibility(View.GONE);
                 super.handleMessage(msg);
             }
 
         };
-        progress.show();
+
+        progress.setVisibility(View.VISIBLE);
+
         new Thread() {
             public void run() {
                 //Retrofit
@@ -120,19 +124,19 @@ public class customPlayerDialog  extends Dialog implements
                                 setData(resultModelTopPlayer);
                             }
 
-                            progress.dismiss();
+                            progress.setVisibility(View.GONE);
 
                         } // try
                         catch (Exception e) {
                             Log.i("QP", "exception : " + e.toString());
-                            progress.dismiss();
+                            progress.setVisibility(View.GONE);
                         } // catch
                     } // onResponse
 
                     @Override
                     public void onFailure(Call<ResultModelTopPlayer> call, Throwable t) {
                         Log.i("QP", "error : " + t.toString());
-                        progress.dismiss();
+                        progress.setVisibility(View.GONE);
                     } // on Failure
                 });
                 // Retrofit
@@ -147,14 +151,17 @@ public class customPlayerDialog  extends Dialog implements
         rcvOffers.setAdapter(adapter);
         rcvOffers.setLayoutManager(new LinearLayoutManager(c));
 
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+       /* DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
+        rcvOffers.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));*/
 
-
-        rcvOffers.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.HORIZONTAL));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
+        rcvOffers.addItemDecoration(dividerItemDecoration);
 
         rcvOffers.setHasFixedSize(true);
+
+
+
 
     }
 
@@ -170,7 +177,6 @@ public class customPlayerDialog  extends Dialog implements
             default:
                 break;
         }
-        dismiss();
     }
 }
 

@@ -198,6 +198,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ResultModelLogin> call, Throwable t) {
                         Log.i("QP", "error : " + t.toString());
+                        Toast.makeText( LoginActivity.this , "Wrong Username or Password" , Toast.LENGTH_LONG).show();
+
                         progress.dismiss();
                     } // on Failure
                 });

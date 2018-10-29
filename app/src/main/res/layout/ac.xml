@@ -8,6 +8,17 @@
     tools:context=".View.HomeActivty">
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bar"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" />
+
+
     <LinearLayout
         android:id="@+id/toplayout"
         android:layout_width="match_parent"
@@ -15,7 +26,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/bar"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -23,9 +33,9 @@
         <RelativeLayout
             android:layout_width="65dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp">
+            android:layout_marginTop="15dp">
 
             <ImageView
                 android:id="@+id/img_money"
@@ -38,7 +48,6 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
                 android:src="@drawable/money" />
-
 
 
             <TextView
@@ -191,8 +200,8 @@
             android:id="@+id/top_player_layout"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp">
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp">
 
             <ImageView
                 android:id="@+id/img_profile"
@@ -215,20 +224,19 @@
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toplayout"
         android:layout_above="@+id/bottom_layout"
-        android:layout_marginBottom="5dp"
-        android:weightSum="5"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical">
+        android:layout_below="@+id/toplayout"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:weightSum="5.05">
 
         <LinearLayout
             android:id="@+id/img_resources_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="end"
+            android:layout_weight="0.35"
             android:gravity="end"
-            android:layout_weight="0.3"
             android:orientation="horizontal">
 
             <ImageView
@@ -246,9 +254,9 @@
 
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
             android:layout_gravity="end"
             android:layout_marginTop="5dp"
+            android:layout_weight="0.35"
             android:gravity="end"
             android:orientation="horizontal"
 
@@ -266,14 +274,13 @@
         </LinearLayout>
 
 
-
         <LinearLayout
             android:id="@+id/img_request_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
             android:layout_gravity="end"
             android:layout_marginTop="5dp"
+            android:layout_weight="0.35"
             android:gravity="end"
             android:orientation="horizontal"
 
@@ -293,11 +300,7 @@
                 android:src="@drawable/request_btn" />
 
 
-
         </LinearLayout>
-
-
-
 
 
         <RelativeLayout
@@ -305,30 +308,38 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="start"
-            android:layout_marginTop="5dp"
-            android:gravity="start"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:gravity="start"
+            android:orientation="vertical"
+            android:weightSum="2">
 
             <ImageView
                 android:id="@+id/img_farm"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="50dp"
+                android:layout_marginBottom="8dp"
                 android:scaleType="fitXY"
                 android:adjustViewBounds="true"
+
                 android:src="@drawable/farm_img" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignEnd="@+id/img_farm"
+                android:layout_alignRight="@+id/img_farm"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/black"
+
+                >
 
             <TextView
                 android:id="@+id/farmlevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/img_farm"
-                android:layout_alignRight="@+id/img_farm"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/black"
                 android:fontFamily="@font/disneycomic"
                 android:shadowColor="@android:color/black"
                 android:text="Level: "
@@ -339,13 +350,6 @@
                 android:id="@+id/farm_count_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/farmlevel"
-                android:layout_alignRight="@+id/img_farm"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="-9dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="0dp"
-                android:background="@android:color/black"
                 android:fontFamily="@font/disneycomic"
                 android:shadowColor="@android:color/white"
                 android:text="1"
@@ -354,6 +358,7 @@
 
 
 
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -362,10 +367,10 @@
             android:id="@+id/stock_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_below="@+id/farm_layout"
             android:layout_gravity="end"
             android:layout_marginRight="30dp"
+            android:layout_weight="1"
             android:gravity="end"
             android:orientation="vertical">
 
@@ -377,27 +382,30 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="0dp"
-                android:layout_marginEnd="46dp"
-                android:layout_marginRight="46dp"
+                android:layout_marginBottom="13dp"
                 android:scaleType="fitXY"
                 android:adjustViewBounds="true"
-                android:layout_marginBottom="7dp"
+
                 android:src="@drawable/stockyard_img" />
 
-            <TextView
-                android:id="@+id/stocklevel"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/img_stock"
                 android:layout_alignRight="@+id/img_stock"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
+                android:orientation="horizontal"
                 android:background="@android:color/black"
+
+                >
+
+            <TextView
+                android:id="@+id/stocklevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/disneycomic"
                 android:shadowColor="@android:color/white"
                 android:text="Level: "
-
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
@@ -405,18 +413,13 @@
                 android:id="@+id/stock_level_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/stocklevel"
-                android:layout_alignRight="@+id/img_stock"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="-9dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="0dp"
-                android:background="@android:color/black"
                 android:fontFamily="@font/disneycomic"
                 android:shadowColor="@android:color/black"
                 android:text="1"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -424,9 +427,9 @@
             android:id="@+id/factory_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_below="@+id/stock_layout"
             android:layout_gravity="start"
+            android:layout_weight="1"
             android:gravity="start"
             android:orientation="vertical">
 
@@ -434,61 +437,58 @@
                 android:id="@+id/img_factory"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="50dp"
                 android:layout_marginRight="70dp"
+                android:layout_marginBottom="11dp"
                 android:scaleType="fitXY"
                 android:adjustViewBounds="true"
-                android:layout_marginBottom="7dp"
-                android:src="@drawable/factory_img"
-                android:layout_marginEnd="50dp" />
 
+                android:src="@drawable/factory_img" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignEnd="@+id/img_factory"
+                android:layout_alignRight="@+id/img_factory"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/black"
+
+                >
             <TextView
                 android:id="@+id/factorylevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/img_factory"
-                android:layout_alignRight="@+id/img_factory"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/black"
-
                 android:fontFamily="@font/disneycomic"
                 android:shadowColor="@android:color/white"
                 android:text="Level: "
-
                 android:textColor="@android:color/white"
-
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/factorylevelcount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/factorylevel"
-                android:layout_alignRight="@+id/img_factory"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="-9dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="0dp"
-                android:background="@android:color/black"
                 android:fontFamily="@font/disneycomic"
                 android:shadowColor="@android:color/black"
-
                 android:text="1"
                 android:textColor="@android:color/white"
 
 
                 android:textStyle="bold" />
 
+            </LinearLayout>
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_below="@+id/factory_layout"
             android:layout_gravity="end"
-            android:layout_marginRight="70dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
             android:gravity="end"
             android:orientation="vertical">
 
@@ -496,54 +496,49 @@
                 android:id="@+id/img_hospital"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:adjustViewBounds="true"
-                android:layout_marginBottom="7dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="0dp"
+                android:layout_marginBottom="14dp"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
                 android:src="@drawable/hospital_img" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:layout_alignEnd="@+id/img_hospital"
+                android:layout_alignRight="@+id/img_hospital"
+                android:background="@android:color/black"
+
+                >
+
 
             <TextView
                 android:id="@+id/hospitallevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/img_hospital"
-                android:layout_alignRight="@+id/img_hospital"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/black"
                 android:fontFamily="@font/disneycomic"
-
                 android:shadowColor="@android:color/white"
                 android:text="Level: "
-
                 android:textColor="@android:color/white"
-
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/hospital_level_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/hospitallevel"
-                android:layout_alignRight="@+id/img_hospital"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="-9dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="0dp"
-                android:background="@android:color/black"
                 android:fontFamily="@font/disneycomic"
                 android:shadowColor="@android:color/white"
                 android:text="1"
-
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
+            </LinearLayout>
+
         </RelativeLayout>
-
-
     </LinearLayout>
 
 
@@ -554,15 +549,17 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+
+        >
 
 
         <ImageView
             android:id="@+id/btn_water"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:scaleType="fitCenter"
             android:layout_marginLeft="15dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/wateroff" />
 
         <View
@@ -617,8 +614,8 @@
             android:id="@+id/btn_workers"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:scaleType="fitCenter"
             android:layout_marginRight="15dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/workersoff" />
 
 

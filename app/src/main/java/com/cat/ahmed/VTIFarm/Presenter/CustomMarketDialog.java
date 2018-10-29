@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.cat.ahmed.VTIFarm.Model.ApiInterface.MarketApi;
@@ -42,7 +43,7 @@ public class CustomMarketDialog extends Dialog implements
 
 
     Handler handler;
-    ProgressDialog progress;
+    ProgressBar progress;
     ResultModelBuyItem resultModelBuyItem;
 
 
@@ -73,12 +74,23 @@ public class CustomMarketDialog extends Dialog implements
         count_medicine =  findViewById(R.id.count_medicine);
         count_food =  findViewById(R.id.count_food);
 
+     /*   rogress = new ProgressDialog(wrapper.getActivity());
+        progress.setTitle(R.string.pleaseWait);
+        progress.setMessage(wrapper.getActivity().getString(R.string.loading));
+        progress.setCancelable(false);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);*/
+
+
+        progress = findViewById(R.id.progressBar);
+
+
         btn_buy_animal.setOnClickListener(this);
         btn_sell_animal.setOnClickListener(this);
         btn_buy_medicine.setOnClickListener(this);
         btn_sell_medicine.setOnClickListener(this);
         btn_buy_food.setOnClickListener(this);
         btn_sell_food.setOnClickListener(this);
+        btn_close.setOnClickListener(this);
 
     }
 
@@ -89,7 +101,6 @@ public class CustomMarketDialog extends Dialog implements
                 item = "animals";
                 count = count_animal.getText().toString().trim();
                 buyitem(item , count);
-
                 break;
             case R.id.btn_sell_animal:
                 item = "animals";
@@ -125,28 +136,28 @@ public class CustomMarketDialog extends Dialog implements
             default:
                 break;
         }
-        dismiss();
     }
 
     private void sellItem(final String item, final String count) {
 
 
-        progress = new ProgressDialog(wrapper.getActivity());
-        progress.setTitle(R.string.pleaseWait);
-        progress.setMessage(wrapper.getActivity().getString(R.string.loading));
-        progress.setCancelable(false);
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+
+
+
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                progress.dismiss();
+                progress.setVisibility(View.GONE);
                 super.handleMessage(msg);
             }
 
         };
 
-        progress.show();
+        progress.setVisibility(View.VISIBLE);
+
+
         new Thread() {
             public void run() {
                 //Retrofit
@@ -181,19 +192,19 @@ public class CustomMarketDialog extends Dialog implements
 
                             }
 
-                            progress.dismiss();
+                            progress.setVisibility(View.GONE);
 
                         } // try
                         catch (Exception e) {
                             Log.i("QP", "exception : " + e.toString());
-                            progress.dismiss();
+                            progress.setVisibility(View.GONE);
                         } // catch
                     } // onResponse
 
                     @Override
                     public void onFailure(Call<ResultModelBuyItem> call, Throwable t) {
                         Log.i("QP", "error : " + t.toString());
-                        progress.dismiss();
+                        progress.setVisibility(View.GONE);
                     } // on Failure
                 });
                 // Retrofit
@@ -207,21 +218,25 @@ public class CustomMarketDialog extends Dialog implements
     private void buyitem(final String item, final String count) {
 
 
-        progress = new ProgressDialog(wrapper.getActivity());
+        /*progress = new ProgressDialog(wrapper.getActivity());
         progress.setTitle(R.string.pleaseWait);
         progress.setMessage(wrapper.getActivity().getString(R.string.loading));
         progress.setCancelable(false);
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);*/
+
+
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                progress.dismiss();
+                progress.setVisibility(View.GONE);
                 super.handleMessage(msg);
             }
 
         };
-        progress.show();
+
+        progress.setVisibility(View.VISIBLE);
+
         new Thread() {
             public void run() {
                 //Retrofit
@@ -256,19 +271,19 @@ public class CustomMarketDialog extends Dialog implements
                                 wrapper.updateUiCounter(response.body());
                             }
 
-                            progress.dismiss();
+                            progress.setVisibility(View.GONE);
 
                         } // try
                         catch (Exception e) {
                             Log.i("QP", "exception : " + e.toString());
-                            progress.dismiss();
+                            progress.setVisibility(View.GONE);
                         } // catch
                     } // onResponse
 
                     @Override
                     public void onFailure(Call<ResultModelBuyItem> call, Throwable t) {
                         Log.i("QP", "error : " + t.toString());
-                        progress.dismiss();
+                        progress.setVisibility(View.GONE);
                     } // on Failure
                 });
                 // Retrofit

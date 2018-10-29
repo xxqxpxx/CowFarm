@@ -7,6 +7,7 @@
     android:background="@drawable/bk"
     android:gravity="center"
     android:orientation="vertical"
+    android:windowSoftInputMode="adjustPan"
     tools:context=".View.LoginActivity">
 
 
@@ -16,7 +17,9 @@
         android:layout_gravity="center"
         android:layout_margin="50dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:windowSoftInputMode="adjustPan"
+        >
 
 
         <LinearLayout
@@ -38,6 +41,8 @@
                     android:gravity="center"
                     android:hint="@string/userName"
                     android:inputType="text"
+                    android:fontFamily="@font/disneycomic"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -55,6 +60,8 @@
                     android:hint="@string/password"
                     android:inputType="textPassword"
 
+                    android:fontFamily="@font/disneycomic"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -65,17 +72,23 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="15dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/chckRemember"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@android:color/black"
                     android:checked="true"
                     android:gravity="center"
                     android:text="remember me"
+
+                    android:fontFamily="@font/disneycomic"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
 
                     />
             </LinearLayout>

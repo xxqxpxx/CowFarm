@@ -9,6 +9,13 @@ public class data {
 
     @SerializedName("id")
     public String id;
+    @SerializedName("btn")
+    public String btn;
+
+    public String getBtn() {
+        return btn;
+    }
+
     @SerializedName("village_id")
     public String village_id;
     @SerializedName("name")

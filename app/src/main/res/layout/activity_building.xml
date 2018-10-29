@@ -8,6 +8,19 @@
     tools:context="com.cat.ahmed.VTIFarm.View.BuildingActivity">
 
 
+    <ImageView
+        android:background="@drawable/bar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="3dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        />
+
+
     <LinearLayout
         android:id="@+id/toplayout"
         android:layout_width="match_parent"
@@ -15,9 +28,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/bar"
+        android:layout_marginTop="5dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
+
 
 
         <RelativeLayout
@@ -211,6 +225,7 @@
 
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -232,7 +247,7 @@
             <ImageView
                 android:id="@+id/img_resources"
                 android:layout_width="130dp"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="50dp"
                 android:layout_marginRight="20dp"
                 android:scaleType="fitXY"
@@ -252,7 +267,7 @@
             <ImageView
                 android:id="@+id/img_market"
                 android:layout_width="130dp"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginRight="20dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/market_btn"
@@ -491,6 +506,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
                 android:src="@drawable/farm" />
 
             <TextView
@@ -533,8 +549,8 @@
 
             <ImageView
                 android:id="@+id/img_upgrade"
-                android:layout_width="130dp"
-                android:layout_height="40dp"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="7dp"

@@ -20,8 +20,8 @@ android {
         applicationId "com.cat.ahmed.cowfarm"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 5
-        versionName "5.0"
+        versionCode 8
+        versionName "8.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders = [
@@ -67,6 +67,7 @@ dependencies {
     api 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'
     api 'com.squareup.retrofit2:retrofit:2.3.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    implementation 'com.google.android.gms:play-services-analytics:16.0.4'
 
     api 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
 }

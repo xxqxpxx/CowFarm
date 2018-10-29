@@ -1,8 +1,6 @@
 package com.cat.ahmed.VTIFarm.Presenter;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +46,7 @@ public class customBuildingDialog extends Dialog implements
     ResultModelUpgradeInfo resultModelUpgradeInfo;
     ResultModelGeneric resultModelGeneric;
 
+    ProgressBar progress;
 
     public customBuildingDialog(wrapper wrapper, String userId, String building) {
         super(wrapper.getActivity());
@@ -61,7 +61,7 @@ public class customBuildingDialog extends Dialog implements
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setCanceledOnTouchOutside(true);
-        setContentView(R.layout.dialog_farm);
+        setContentView(R.layout.dialog_building);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
 
@@ -72,6 +72,8 @@ public class customBuildingDialog extends Dialog implements
         txt_money_count = findViewById(R.id.txt_money_count);
         txt_currentLeveL = findViewById(R.id.txt_currentLeveL);
         farm_count_level = findViewById(R.id.farm_count_level);
+
+        progress = findViewById(R.id.progressBar);
 
         if (building.equals("farm"))
             img_buidling_type.setImageResource(R.drawable.farm);
@@ -171,7 +173,6 @@ public class customBuildingDialog extends Dialog implements
             default:
                 break;
         }
-        dismiss();
     }
 
     private void upgradeBuilding() {
@@ -184,6 +185,9 @@ public class customBuildingDialog extends Dialog implements
             }
 
         };
+
+        progress.setVisibility(View.VISIBLE);
+
         new Thread() {
             public void run() {
                 //Retrofit
@@ -224,11 +228,18 @@ public class customBuildingDialog extends Dialog implements
                         catch (Exception e) {
                             Log.i("QP", "exception : " + e.toString());
                         } // catch
+
+                        progress.setVisibility(View.GONE);
+
+
                     } // onResponse
 
                     @Override
                     public void onFailure(Call<ResultModelUpgradeRequest> call, Throwable t) {
                         Log.i("QP", "error : " + t.toString());
+
+                        progress.setVisibility(View.GONE);
+
                     } // on Failure
                 });
                 // Retrofit
