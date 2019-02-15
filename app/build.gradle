@@ -20,8 +20,8 @@ android {
         applicationId "com.cat.ahmed.cowfarm"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 8
-        versionName "8.0"
+        versionCode 9
+        versionName "9.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders = [
